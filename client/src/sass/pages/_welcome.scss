@@ -58,8 +58,8 @@
 // desktop display
 @media screen and (min-width: 1024px) {
   .welcome {
-    &__signup-btn,
-    &__login-btn {
+    &__signup-link,
+    &__login-link {
       max-width: 600px;
     }
   }

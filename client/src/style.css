@@ -88,12 +88,11 @@ button {
 }
 
 @media screen and (min-width: 1024px) {
-  .welcome__signup-btn, .welcome__login-btn {
+  .welcome__signup-link, .welcome__login-link {
     max-width: 600px;
   }
 }
 .login {
-  position: sticky;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -104,6 +103,9 @@ button {
   display: flex;
   flex-direction: column;
   gap: 2rem;
+}
+.login__intro a {
+  width: 20px;
 }
 .login__intro-arrow {
   border: 1px solid white;
@@ -131,7 +133,6 @@ button {
   margin-bottom: 1rem;
   border-radius: 5px;
   font-size: 0.9rem;
-  max-width: 90%;
 }
 .login__infos input {
   background: #4e5166;
@@ -171,6 +172,98 @@ button {
 }
 .login__signup a:hover {
   color: #fd2d01;
+}
+
+@media screen and (min-width: 1024px) {
+  .login {
+    align-items: center;
+  }
+  .login__intro-arrow {
+    position: absolute;
+    left: 5%;
+  }
+}
+.signup {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  height: 100vh;
+  padding: 2rem;
+}
+.signup__intro {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+.signup__intro a {
+  width: 20px;
+}
+.signup__intro-arrow {
+  border: 1px solid white;
+  border-radius: 3px;
+  font-size: 20px;
+  color: white;
+  transition: all 400ms ease;
+}
+.signup__intro-arrow:hover {
+  color: #fd2d01;
+  border-color: #fd2d01;
+}
+.signup__intro-title {
+  color: white;
+}
+.signup form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.signup form input {
+  width: 100%;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 5px;
+  font-size: 0.9rem;
+}
+.signup__info {
+  background: #4e5166;
+  border: 2px solid #ffd7d7;
+  transition: all 400ms ease;
+  color: white;
+}
+.signup__info::placeholder {
+  color: #ffd7d7;
+  font-size: 0.9rem;
+}
+.signup__info:focus {
+  background: #ffd7d7;
+  border-color: white;
+  color: #4e5166;
+}
+.signup__submit {
+  background: white;
+  border-color: transparent;
+  transition: all 400ms ease;
+  color: #4e5166;
+  border: 2px solid transparent;
+}
+.signup__submit:hover {
+  background: #fd2d01;
+  border-color: black;
+  color: black;
+}
+
+@media screen and (min-width: 760px) {
+  .signup {
+    align-items: center;
+  }
+  .signup__intro-arrow {
+    position: absolute;
+    left: 5%;
+  }
+  .signup input {
+    min-width: 300px;
+  }
 }
 
 /*# sourceMappingURL=style.css.map */
