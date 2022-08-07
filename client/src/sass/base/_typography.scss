@@ -19,6 +19,7 @@ html {
 
 body {
   font-family: 'Lato', sans-serif;
+  background: $tertiary-color;
 }
 
 h1,
@@ -42,22 +43,3 @@ button {
 
 // media queries
 // MOBILE
-@media screen and (min-width: 300px) and (max-width: 779px) {
-  .container {
-    width: $container-width-sm;
-  }
-}
-
-// TABLET
-@media screen and (min-width: 780) and (max-width: 1023px) {
-  .container {
-    width: $container-width-md;
-  }
-}
-
-// DESKTOP
-@media screen and (min-width: 1024px) and (max-width: 1920px) {
-  .container {
-    width: $container-width-lg;
-  }
-}

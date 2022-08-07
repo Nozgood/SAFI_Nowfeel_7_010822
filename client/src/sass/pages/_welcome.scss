@@ -7,64 +7,55 @@
   min-height: 600px;
   gap: 2rem;
   padding: 1rem;
+  background: linear-gradient($tertiary-color, 90%, black);
 
   &__title {
     align-content: center;
-  }
-
-  &__login-btn,
-  &__signup-btn {
-    border: 2px solid;
-    width: 90%;
-    padding: 1rem;
-    border-radius: 8px;
+    color: white;
   }
 
   &__login-link,
   &__signup-link {
-    font-weight: bold;
+    border: 2px solid;
+    width: 90%;
+    padding: 0.8rem;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 0.9rem;
   }
 
   &__login {
-    &-btn {
+    &-link {
       background: black;
       border-color: transparent;
       transition: $transition;
+      color: white;
 
       &:hover {
         background: $primary-color;
         border-color: black;
-        a {
-          color: black;
-        }
+        transform: scale(0.9);
+        color: black;
       }
-    }
-
-    &-link {
-      color: white;
     }
   }
 
   &__signup {
-    &-btn {
+    &-link {
       transition: $transition;
+      background: $secondary-color;
 
       &:hover {
         background: $tertiary-color;
         border-color: $secondary-color;
-
-        a {
-          color: $secondary-color;
-        }
+        transform: scale(0.9);
+        color: $secondary-color;
       }
-    }
-
-    &-link {
-      color: black;
     }
   }
 }
 
+// desktop display
 @media screen and (min-width: 1024px) {
   .welcome {
     &__signup-btn,
