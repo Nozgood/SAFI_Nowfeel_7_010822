@@ -7,7 +7,7 @@
   min-height: 600px;
   gap: 2rem;
   padding: 1rem;
-  background: linear-gradient($tertiary-color, 90%, black);
+  background: linear-gradient($tertiary-color, 80%, $secondary-color);
 
   &__title {
     align-content: center;

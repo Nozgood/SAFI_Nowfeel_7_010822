@@ -50,7 +50,7 @@ button {
   min-height: 600px;
   gap: 2rem;
   padding: 1rem;
-  background: linear-gradient(#4e5166, 90%, black);
+  background: linear-gradient(#4e5166, 80%, #ffd7d7);
 }
 .welcome__title {
   align-content: center;
@@ -98,6 +98,7 @@ button {
   justify-content: space-between;
   height: 100vh;
   padding: 2rem;
+  background: linear-gradient(#4e5166, 80%, #ffd7d7);
 }
 .login__intro {
   display: flex;
@@ -189,6 +190,7 @@ button {
   gap: 3rem;
   height: 100vh;
   padding: 2rem;
+  background: linear-gradient(#4e5166, 80%, #ffd7d7);
 }
 .signup__intro {
   display: flex;
