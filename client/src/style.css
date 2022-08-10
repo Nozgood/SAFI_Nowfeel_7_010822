@@ -267,5 +267,113 @@ button {
     min-width: 300px;
   }
 }
+main {
+  padding: 10rem 1rem;
+}
+
+.header {
+  display: flex;
+}
+
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  position: fixed;
+  width: 100%;
+  min-height: 75px;
+  background-color: black;
+}
+.nav__list {
+  display: flex;
+}
+.nav__link {
+  color: white;
+  padding: 0 0.3rem;
+}
+.nav__burger {
+  width: 40px;
+  height: 40px;
+  background: transparent;
+  color: white;
+}
+
+@media screen and (max-width: 1023px) {
+  .nav {
+    background: transparent;
+  }
+  .nav__list {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    right: -100vw;
+    bottom: 0;
+    height: 100vh;
+    padding: 2rem;
+    background: rgba(0, 0, 0, 0.6);
+    visibility: hidden;
+    transition: all 400ms ease;
+    width: 0;
+  }
+  .nav__list.open {
+    width: 100vw;
+    right: 0;
+    visibility: visible;
+  }
+  .nav__item:last-child::after {
+    display: none;
+  }
+  .nav__item::after {
+    content: "";
+    display: block;
+    margin: 0 auto;
+    width: 3vw;
+    height: 1px;
+    background: white;
+  }
+  .nav__link {
+    display: block;
+    padding: 1.5rem;
+    font-size: 5vw;
+  }
+  .nav__burger {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+  }
+  .nav__burger-bar, .nav__burger-bar::before, .nav__burger-bar::after {
+    display: block;
+    width: 40px;
+    height: 3px;
+    position: relative;
+    border-radius: 3px;
+    background: white;
+    transition: all 400ms ease;
+  }
+  .nav__burger-bar::before, .nav__burger-bar::after {
+    content: "";
+    position: absolute;
+    left: 0;
+  }
+  .nav__burger-bar::before {
+    transform: translateY(-12px);
+  }
+  .nav__burger-bar::after {
+    transform: translateY(12px);
+  }
+  .nav.open .nav__burger-bar {
+    background: transparent;
+    width: 0;
+  }
+  .nav.open .nav__burger-bar::before {
+    transform: rotate(45deg);
+  }
+  .nav.open .nav__burger-bar::after {
+    transform: rotate(-45deg);
+  }
+}
 
 /*# sourceMappingURL=style.css.map */

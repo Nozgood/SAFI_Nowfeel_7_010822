@@ -1,5 +1,15 @@
+// VARIABLES / TYPO
 @import './utils/variables';
 @import './base//typography';
+
+// PAGES
 @import './pages/welcome';
 @import './pages//login';
 @import './pages/signup';
+@import './pages/profile';
+
+// LAYOUTS
+@import './layout/header';
+
+// COMPONENTS
+@import './components/nav';

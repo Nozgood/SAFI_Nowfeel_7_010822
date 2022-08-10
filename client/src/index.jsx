@@ -5,6 +5,8 @@ import Login from './pages/Login'
 import Signup from './pages/Signup'
 import Home from './pages/Home'
 import Error from './pages/Error'
+import Profile from './pages/profile/Profile'
+import Update from './pages/profile/Update'
 import './style.css'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
@@ -26,10 +28,9 @@ if (token === null) {
   root.render(
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Welcome />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/home" element={<Home />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/profile/update" element={<Update />} />
         <Route path="/*" element={<Error />} />
       </Routes>
     </BrowserRouter>
