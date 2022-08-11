@@ -55,7 +55,11 @@ exports.login = (req, res, next) => {
 // GET ONE USER INFO FUNCTION
 
 exports.oneUser = ((req, res, next) => {
-
+    User.findOne({
+        _id: req.params.id
+    })
+        .then((data)=> res.status(200).json(data))
+        .catch((error) => res.status(400).json({ error }))
 });
 
 // PUT USER INFOS FUNCTION

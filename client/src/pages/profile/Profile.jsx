@@ -1,44 +1,29 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Header from '../../components/Header/Header'
 
 const Profile = () => {
-  return (
-    <div>
-      <Header />
+  const [data, setData] = useState({
+    userSurname: '',
+    userName: '',
+    profilePhotoUrl: '',
+    coverPhotoUrl: '',
+  })
 
-      <main>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint sed
-          velit officiis placeat ullam. Esse minus similique quas accusantium
-          quasi.
-        </p>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint sed
-          velit officiis placeat ullam. Esse minus similique quas accusantium
-          quasi.
-        </p>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint sed
-          velit officiis placeat ullam. Esse minus similique quas accusantium
-          quasi.
-        </p>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint sed
-          velit officiis placeat ullam. Esse minus similique quas accusantium
-          quasi.
-        </p>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint sed
-          velit officiis placeat ullam. Esse minus similique quas accusantium
-          quasi.
-        </p>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint sed
-          velit officiis placeat ullam. Esse minus similique quas accusantium
-          quasi.
-        </p>
-      </main>
-    </div>
+  useEffect(() => {
+    const userId = localStorage.getItem('userId')
+    fetch('http://localhost:8000/api/user/' + userId)
+      .then((res) => {
+        return res.json()
+      })
+      .then((data) => {
+        setData(data)
+      })
+  }, [])
+
+  return (
+    <>
+      <Header />
+    </>
   )
 }
 

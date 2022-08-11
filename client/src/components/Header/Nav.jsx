@@ -15,6 +15,8 @@ const Nav = () => {
     window.location.href('http://localhost:3000')
   }
 
+  const userId = localStorage.getItem('userId')
+
   return (
     <nav className={burger === true ? 'nav open' : 'nav'}>
       <img src={logo} alt="logo" className="nav__logo" />
@@ -25,7 +27,7 @@ const Nav = () => {
           </Link>
         </li>
         <li className="nav__item">
-          <Link to="/profile" className="nav__link">
+          <Link to={`/profile/${userId}`} className="nav__link">
             Profil
           </Link>
         </li>
