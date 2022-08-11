@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+import logo from '../../assets/icon-left-font-monochrome-white.svg'
+import { AiOutlineSearch } from 'react-icons/ai'
 
 const Nav = () => {
   const [burger, setBurger] = useState(false)
@@ -15,6 +17,7 @@ const Nav = () => {
 
   return (
     <nav className={burger === true ? 'nav open' : 'nav'}>
+      <img src={logo} alt="logo" className="nav__logo" />
       <ul className={burger === true ? 'nav__list open' : 'nav__list'}>
         <li className="nav__item">
           <Link to="/" className="nav__link">
@@ -32,9 +35,14 @@ const Nav = () => {
           </Link>
         </li>
       </ul>
-      <button className="nav__burger" onClick={handleBurger}>
-        <span className="nav__burger-bar"></span>
-      </button>
+      <div className="nav__buttons">
+        <Link to="/search">
+          <AiOutlineSearch className="nav__buttons-search" />
+        </Link>
+        <button className="nav__burger" onClick={handleBurger}>
+          <span className="nav__burger-bar"></span>
+        </button>
+      </div>
     </nav>
   )
 }

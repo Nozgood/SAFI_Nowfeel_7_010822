@@ -7,6 +7,7 @@ import Home from './pages/Home'
 import Error from './pages/Error'
 import Profile from './pages/profile/Profile'
 import Update from './pages/profile/Update'
+import Search from './pages/Search'
 import './style.css'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
@@ -29,7 +30,9 @@ if (token === null) {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/search" element={<Search />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/:userId" element={<Profile />} />
         <Route path="/profile/update" element={<Update />} />
         <Route path="/*" element={<Error />} />
       </Routes>

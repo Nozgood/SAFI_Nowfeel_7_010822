@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 // SIGNUP FUNCTION
-exports.signup = ((req, res, next )=> {
+exports.signup = (req, res, next )=> {
     bcrypt.hash(req.body.password, 10)
         .then((hash) => {
             const user = new User({
@@ -20,11 +20,11 @@ exports.signup = ((req, res, next )=> {
                 .catch((err) => res.status(400).json({ err }));
         })
         .catch((err)=> res.status(500).json({ err }));
-});
+};
 
 // LOGIN FUNCTION
 
-exports.login = ((req, res, next) => {
+exports.login = (req, res, next) => {
     User.findOne({ email : req.body.email })
         .then((user)=> {
             if (user === null) {
@@ -50,7 +50,7 @@ exports.login = ((req, res, next) => {
             }
         })
         .catch((err)=> res.status(500).json({ err }));
-});
+};
 
 // GET ONE USER INFO FUNCTION
 
@@ -63,3 +63,11 @@ exports.oneUser = ((req, res, next) => {
 exports.updateUser = ((req, res, next) => {
 
 });
+
+// GET ALL USERS (for searchbar)
+
+exports.getUsers = (req, res, next) => {
+    User.find()
+        .then(users => res.status(200).json(users))
+        .catch(error => res.status(400).json({ error }));
+};
