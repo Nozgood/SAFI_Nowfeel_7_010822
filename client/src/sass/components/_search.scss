@@ -1,5 +1,18 @@
 .search {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
   padding: 1rem;
+
+  &__back {
+    color: white;
+    font-size: 20px;
+    transition: $transition;
+
+    &:hover {
+      color: $primary-color;
+    }
+  }
   input {
     padding: 0.5rem;
     border-radius: 10px;
@@ -19,6 +32,7 @@
     border-radius: 10px;
 
     &.close {
+      display: none;
     }
   }
 
@@ -27,11 +41,5 @@
     a {
       color: white;
     }
-  }
-}
-
-@media screen and (min-width: 1024px) {
-  .search {
-    display: flex;
   }
 }

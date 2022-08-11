@@ -381,7 +381,18 @@ main {
   }
 }
 .search {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
   padding: 1rem;
+}
+.search__back {
+  color: white;
+  font-size: 20px;
+  transition: all 400ms ease;
+}
+.search__back:hover {
+  color: #fd2d01;
 }
 .search input {
   padding: 0.5rem;
@@ -400,17 +411,14 @@ main {
   background: rgba(0, 0, 0, 0.6);
   border-radius: 10px;
 }
+.search__results.close {
+  display: none;
+}
 .search__result {
   padding: 1rem;
 }
 .search__result a {
   color: white;
-}
-
-@media screen and (min-width: 1024px) {
-  .search {
-    display: flex;
-  }
 }
 
 /*# sourceMappingURL=style.css.map */

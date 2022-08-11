@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import { AiOutlineArrowLeft } from 'react-icons/ai'
 
 const SearchBar = () => {
   const [datas, setDatas] = useState([])
@@ -27,6 +28,9 @@ const SearchBar = () => {
   return (
     <>
       <div className="search">
+        <Link to="/">
+          <AiOutlineArrowLeft className="search__back" />
+        </Link>
         <input
           type="text"
           name="searchBar"
@@ -52,7 +56,7 @@ const SearchBar = () => {
             return (
               <div className="search__result">
                 <Link
-                  to={`/${value._id}`}
+                  to={`/profile/${value._id}`}
                   className="search__results-link"
                   key={value._id}
                 >
