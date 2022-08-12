@@ -33,7 +33,7 @@ if (token === null) {
         <Route path="/search" element={<Search />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/profile/:userId" element={<Profile />} />
-        <Route path="/profile/update" element={<Update />} />
+        <Route path="/profile/update/:userId" element={<Update />} />
         <Route path="/*" element={<Error />} />
       </Routes>
     </BrowserRouter>

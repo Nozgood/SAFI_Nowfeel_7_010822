@@ -6,7 +6,7 @@
   padding: 1rem;
   position: fixed;
   width: 100%;
-  min-height: 75px;
+  height: 75px;
   background: rgba(0, 0, 0, 0.6);
 
   &__logo {
@@ -121,6 +121,7 @@
 // MEDIA QUERIES
 @media screen and (min-width: 1024px) {
   .nav {
+    height: 90px;
     &__link {
       font-size: 1.4rem;
     }
