@@ -6,7 +6,8 @@
 
     img {
       width: 100%;
-      height: 200px;
+      height: 100%;
+      max-height: 500px;
       object-fit: cover;
     }
   }
@@ -14,6 +15,7 @@
   &__infos {
     display: flex;
     justify-content: space-around;
+    align-items: center;
     gap: 1.5rem;
     border-bottom: 1px solid black;
     padding-bottom: 1rem;
@@ -29,7 +31,7 @@
         overflow: hidden;
 
         img {
-          width: 70px;
+          width: 100px;
           object-fit: cover;
           border: 1px solid $tertiary-color;
           border-radius: 100%;
@@ -62,8 +64,10 @@
   }
 
   &__publications {
-    background: $secondary-color;
-    height: 1000px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 }
 

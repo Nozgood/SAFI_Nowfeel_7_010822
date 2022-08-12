@@ -41,6 +41,15 @@ button {
   cursor: pointer;
 }
 
+main {
+  padding-top: 75px;
+}
+
+@media all and (min-width: 1024px) {
+  main {
+    padding-top: 90px;
+  }
+}
 .welcome {
   display: flex;
   flex-direction: column;
@@ -275,12 +284,14 @@ button {
 }
 .profile__cover img {
   width: 100%;
-  height: 200px;
+  height: 100%;
+  max-height: 500px;
   object-fit: cover;
 }
 .profile__infos {
   display: flex;
   justify-content: space-around;
+  align-items: center;
   gap: 1.5rem;
   border-bottom: 1px solid black;
   padding-bottom: 1rem;
@@ -296,7 +307,7 @@ button {
   overflow: hidden;
 }
 .profile__infos-content-img img {
-  width: 70px;
+  width: 100px;
   object-fit: cover;
   border: 1px solid #4e5166;
   border-radius: 100%;
@@ -320,8 +331,10 @@ button {
   background: #fd2d01;
 }
 .profile__publications {
-  background: #ffd7d7;
-  height: 1000px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 @media screen and (min-width: 1024px) {
@@ -480,6 +493,71 @@ button {
 }
 .search__result a {
   color: white;
+}
+
+.publish {
+  background: #ffd7d7;
+  padding: 0.5rem;
+  margin: 1rem;
+  border-radius: 10px;
+  max-width: 500px;
+  border: 1px solid;
+  width: 100vw;
+}
+.publish img {
+  width: 50px;
+  border: 1px solid black;
+  border-radius: 100%;
+  background: white;
+}
+.publish form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: center;
+}
+.publish__form-text {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+}
+.publish__form-text-input {
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 7px;
+}
+.publish__form-text-input::placeholder {
+  color: #4e5166;
+}
+.publish__form-file-input::-webkit-file-upload-button {
+  font-family: "Lato", sans-serif;
+  background: white;
+  border: 1px solid black;
+  padding: 0.3rem;
+  border-radius: 7px;
+  text-overflow: none;
+  color: #4e5166;
+  transition: all 400ms ease;
+  margin-bottom: 10px;
+}
+.publish__form-file-input::-webkit-file-upload-button:hover {
+  background: #4e5166;
+  color: #ffd7d7;
+  border-color: #ffd7d7;
+}
+.publish__form-submit-input {
+  padding: 0.5rem 1rem;
+  border-radius: 7px;
+  background: #4e5166;
+  color: white;
+  border: 1px solid transparent;
+  transition: all 400ms ease;
+}
+.publish__form-submit-input:hover {
+  border-color: #4e5166;
+  color: black;
+  background: #fd2d01;
 }
 
 /*# sourceMappingURL=style.css.map */

@@ -43,3 +43,13 @@ button {
 
 // media queries
 // MOBILE
+
+main {
+  padding-top: 75px;
+}
+
+@media all and (min-width: 1024px) {
+  main {
+    padding-top: 90px;
+  }
+}

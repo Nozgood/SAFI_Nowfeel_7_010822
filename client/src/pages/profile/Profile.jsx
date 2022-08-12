@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Header from '../../components/Header/Header'
-import Publication from '../../components/Publication'
+import Publication from '../../components/Posts/Publication'
+import Publish from '../../components/Posts/Publish'
 import logo from '../../assets/icon-left-font.svg'
 import user from '../../assets/user.png'
 import { Link } from 'react-router-dom'
@@ -59,6 +60,7 @@ const Profile = () => {
           </div>
         </section>
         <section className="profile__section profile__publications">
+          <Publish data={data} />
           <Publication />
         </section>
       </main>
