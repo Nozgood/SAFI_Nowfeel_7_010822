@@ -1,6 +1,5 @@
 import React from 'react'
 import user from '../../assets/user.png'
-import { HiOutlinePhotograph } from 'react-icons/hi'
 
 const Publish = ({ data }) => {
   return (
@@ -21,19 +20,16 @@ const Publish = ({ data }) => {
               className="publish__form-text-input"
             />
           </div>
-          <div className="publish__form-file">
+          <div className="publish__form-buttons">
             <input
               type="file"
               name="postPhoto"
-              className="publish__form-file-input"
-              title=""
+              className="publish__form-buttons-file"
             />
-          </div>
-          <div className="publish__form-submit">
             <input
               type="submit"
               value="Publier"
-              className="publish__form-submit-input"
+              className="publish__form-buttons-submit"
             />
           </div>
         </form>

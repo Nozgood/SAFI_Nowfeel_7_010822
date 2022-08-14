@@ -502,7 +502,6 @@ main {
   border-radius: 10px;
   max-width: 500px;
   border: 1px solid;
-  width: 100vw;
 }
 .publish img {
   width: 50px;
@@ -530,7 +529,12 @@ main {
 .publish__form-text-input::placeholder {
   color: #4e5166;
 }
-.publish__form-file-input::-webkit-file-upload-button {
+.publish__form-buttons {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-around;
+}
+.publish__form-buttons-file::-webkit-file-upload-button {
   font-family: "Lato", sans-serif;
   background: white;
   border: 1px solid black;
@@ -541,23 +545,29 @@ main {
   transition: all 400ms ease;
   margin-bottom: 10px;
 }
-.publish__form-file-input::-webkit-file-upload-button:hover {
+.publish__form-buttons-file::-webkit-file-upload-button:hover {
   background: #4e5166;
   color: #ffd7d7;
   border-color: #ffd7d7;
 }
-.publish__form-submit-input {
+.publish__form-buttons-submit {
   padding: 0.5rem 1rem;
   border-radius: 7px;
   background: #4e5166;
-  color: white;
+  color: #ffd7d7;
   border: 1px solid transparent;
   transition: all 400ms ease;
 }
-.publish__form-submit-input:hover {
+.publish__form-buttons-submit:hover {
   border-color: #4e5166;
-  color: black;
+  color: white;
   background: #fd2d01;
+}
+
+@media screen and (min-width: 768px) {
+  .publish {
+    width: 100vw;
+  }
 }
 
 /*# sourceMappingURL=style.css.map */

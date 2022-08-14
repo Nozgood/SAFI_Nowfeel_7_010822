@@ -26,6 +26,7 @@ const Home = () => {
       <Header />
       <main>
         <Publish data={data} />
+        <Publication />
       </main>
     </>
   )
