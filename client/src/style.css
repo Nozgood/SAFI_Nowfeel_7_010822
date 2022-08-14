@@ -293,7 +293,7 @@ main {
   justify-content: space-around;
   align-items: center;
   gap: 1.5rem;
-  border-bottom: 1px solid black;
+  border-bottom: 2px solid #ffd7d7;
   padding-bottom: 1rem;
 }
 .profile__infos-content {
@@ -342,6 +342,120 @@ main {
     padding-top: 90px;
   }
 }
+.update__arrow {
+  position: absolute;
+  left: 5%;
+  margin-top: 1rem;
+  border: 1px solid black;
+  border-radius: 3px;
+  font-size: 20px;
+  color: black;
+  transition: all 400ms ease;
+}
+.update__arrow:hover {
+  color: #fd2d01;
+  border-color: #fd2d01;
+}
+.update__cover {
+  width: 100vw;
+}
+.update__cover img {
+  max-height: 200px;
+  width: 100%;
+  object-fit: cover;
+}
+.update__photo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: -3rem;
+}
+.update__photo img {
+  width: 100px;
+  border: 3px solid #4e5166;
+  border-radius: 100%;
+  background: white;
+}
+.update__form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.update__form-files {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  overflow: hidden;
+}
+.update__form-cover, .update__form-profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.update__form-cover-input, .update__form-profile-input {
+  position: absolute;
+  z-index: 1;
+  cursor: pointer;
+  opacity: 0;
+}
+.update__form-cover-button, .update__form-profile-button {
+  border: 1px solid black;
+  padding: 0.5rem;
+  border-radius: 5px;
+  background: #ffd7d7;
+  color: black;
+  transition: all 400ms ease;
+}
+.update__form-cover:hover .update__form-cover-button,
+.update__form-cover:hover .update__form-profile-button, .update__form-profile:hover .update__form-cover-button,
+.update__form-profile:hover .update__form-profile-button {
+  background: #fd2d01;
+  color: white;
+  border-color: #ffd7d7;
+}
+.update__form-surname, .update__form-name {
+  padding: 1rem;
+  margin: 0.5rem;
+  border-radius: 5px;
+}
+.update__form-surname::placeholder, .update__form-name::placeholder {
+  color: #4e5166;
+}
+.update__form-submit {
+  padding: 1rem;
+  margin: 1rem;
+  border-radius: 5px;
+  background-color: black;
+  color: white;
+  font-size: 1rem;
+  transition: all 400ms ease;
+  border: 1px solid transparent;
+}
+.update__form-submit:hover {
+  background: #fd2d01;
+  color: white;
+  border-color: black;
+}
+
+@media screen and (min-width: 768px) {
+  .update__form {
+    align-items: center;
+    justify-content: center;
+  }
+  .update__form-surname, .update__form-name, .update__form-submit {
+    width: 500px;
+  }
+}
+#ok,
+#okk {
+  width: 400px;
+  height: 300px;
+  object-fit: cover;
+  padding: 1rem;
+}
+
 .header {
   display: flex;
 }
