@@ -2,6 +2,7 @@ const express = require('express');
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 const userRoutes = require('./routes/user');
+const multer = require('./middleware/multer-config');
 
 dotenv.config();
 
@@ -29,4 +30,8 @@ mongoose.connect(process.env.MONGO,
 // ALL ROUTES 
 app.use('/api/user', userRoutes);
 
+app.post('/api/test', multer, (req, res) => {
+    console.log('test')
+    console.log(req.file)
+} );
 module.exports = app;

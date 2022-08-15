@@ -65,7 +65,32 @@ exports.oneUser = ((req, res, next) => {
 // PUT USER INFOS FUNCTION
 
 exports.updateUser = ((req, res, next) => {
+    console.log(req.file)
+    console.log(req.files)
+    const userInfos = req.file ? {
+        ...JSON.parse(req.body.data),
+        coverPhotoUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
+    } : {
+        ...req.body
+    };
 
+    delete userInfos._userId;
+
+    User.findOne({
+        _id: req.params.id
+    })
+        .then((user)=> {
+            User.updateOne({
+                _id: req.params.id
+            },
+            {
+                ...userInfos,
+                _id: req.params.id
+            })
+                .then(()=> res.status(200).json({ message : 'infos mises à jour ! '}))
+                .catch((error)=> res.status((401)).json({ error }));
+        })
+        .catch((error)=> res.status(400).json({ error }));
 });
 
 // GET ALL USERS (for searchbar)

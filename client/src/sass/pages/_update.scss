@@ -40,8 +40,10 @@
   &__form {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     gap: 1rem;
     margin-top: 1rem;
+    padding: 2rem 1rem 1rem 1rem;
 
     &-files {
       display: flex;
@@ -81,8 +83,36 @@
           border-color: $secondary-color;
         }
       }
+
+      &-img {
+        overflow: hidden;
+        width: 100%;
+        &--close {
+          display: none;
+        }
+
+        img {
+          width: 100%;
+        }
+      }
     }
 
+    &-profile {
+      &-img {
+        align-content: center;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+
+        img {
+          border-radius: 100%;
+          width: 200px;
+          height: 200px;
+          object-fit: cover;
+          border: 2px solid white;
+        }
+      }
+    }
     &-surname,
     &-name {
       padding: 1rem;
@@ -126,12 +156,4 @@
       }
     }
   }
-}
-
-#ok,
-#okk {
-  width: 400px;
-  height: 300px;
-  object-fit: cover;
-  padding: 1rem;
 }

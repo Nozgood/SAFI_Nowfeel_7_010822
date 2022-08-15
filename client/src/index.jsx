@@ -5,9 +5,10 @@ import Login from './pages/Login'
 import Signup from './pages/Signup'
 import Home from './pages/Home'
 import Error from './pages/Error'
-import Profile from './pages/profile/Profile'
-import Update from './pages/profile/Update'
+import Profile from './pages/Profile/Profile'
+import Update from './pages/Profile/Update'
 import Search from './pages/Search'
+import Test from './pages/Test'
 import './style.css'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
@@ -35,6 +36,7 @@ if (token === null) {
         <Route path="/profile/:userId" element={<Profile />} />
         <Route path="/profile/update/:userId" element={<Update />} />
         <Route path="/*" element={<Error />} />
+        <Route path="/test" element={<Test />} />
       </Routes>
     </BrowserRouter>
   )

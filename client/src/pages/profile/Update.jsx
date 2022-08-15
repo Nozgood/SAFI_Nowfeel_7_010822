@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { AiOutlineArrowLeft } from 'react-icons/ai'
 import { Link } from 'react-router-dom'
+import updateUser from '../../services/updateUser'
 import Header from '../../components/Header/Header'
-import logo from '../../assets/icon-left-font.svg'
-import user from '../../assets/user.png'
 
 const Update = () => {
   const [data, setData] = useState({
@@ -13,16 +12,8 @@ const Update = () => {
     coverPhotoUrl: '',
   })
 
-  useEffect(() => {
-    const userId = localStorage.getItem('userId')
-    fetch('http://localhost:8000/api/user/' + userId)
-      .then((res) => {
-        return res.json()
-      })
-      .then((data) => {
-        setData(data)
-      })
-  }, [])
+  const [loadCover, setLoadCover] = useState(false)
+  const [loadProfile, setLoadProfile] = useState(false)
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -32,33 +23,58 @@ const Update = () => {
       [name]: value,
     })
   }
-
-  const handleCover = () => {
+  // DISPLAY THE NEW COVER PHOTO
+  const handleCover = (e) => {
     const coverChange = document.getElementById('cover').files
 
     if (coverChange.length > 0) {
       const fileReader = new FileReader()
 
       fileReader.onload = function (event) {
-        document.getElementById('ok').setAttribute('src', event.target.result)
+        document
+          .getElementById('coverImg')
+          .setAttribute('src', event.target.result)
+        setLoadCover(true)
+        setData({
+          ...data,
+          coverPhotoUrl: coverChange[0].name,
+        })
       }
       fileReader.readAsDataURL(coverChange[0])
     }
   }
 
+  // DISPLAY THE NEW PROFILE PHOTO
   const handleProfile = () => {
     const profileChange = document.getElementById('profile').files
+    setData({
+      ...data,
+      profilePhotoUrl: profileChange[0].name,
+    })
 
     if (profileChange.length > 0) {
       const test = new FileReader()
 
       test.onload = function (event) {
-        document.getElementById('okk').setAttribute('src', event.target.result)
+        document
+          .getElementById('profileImg')
+          .setAttribute('src', event.target.result)
+        setLoadProfile(true)
       }
       test.readAsDataURL(profileChange[0])
     }
   }
 
+  // UPDATE THE INFOS TO THE DB
+  const handleSubmit = (event) => {
+    event.preventDefault()
+
+    try {
+      updateUser(data)
+    } catch (err) {
+      console.log(err)
+    }
+  }
   return (
     <>
       <Header />
@@ -66,56 +82,56 @@ const Update = () => {
         <Link to="/profile">
           <AiOutlineArrowLeft className="update__arrow" />
         </Link>
-        <div className="update__cover">
-          {data.coverPhotoUrl !== '' ? (
-            <img src={data.coverPhotoUrl} alt="cover" />
-          ) : (
-            <img src={logo} alt="cover" />
-          )}
-        </div>
-        <div className="update__photo">
-          {data.profilePhotoUrl !== '' ? (
-            <img src={data.profilePhotoUrl} alt="profile" />
-          ) : (
-            <img src={user} alt="cover" />
-          )}
-        </div>
-        <form className="update__form">
-          <div className="update__form-files">
-            {/* GESTION PHOTO DE COUVERTURE */}
-            <div className="update__form-cover">
-              <input
-                type="file"
-                name="coverPhotoUrl"
-                className="update__form-cover-input"
-                id="cover"
-                accept="image/*"
-                onChange={handleCover}
-              />
-              <div className="update__form-cover-button">
-                Modifier la photo de couverture
-              </div>
+        <form
+          className="update__form"
+          onSubmit={handleSubmit}
+          encType="multipart/form-data"
+        >
+          {/* GESTION PHOTO DE COUVERTURE */}
+          <div className="update__form-cover">
+            <input
+              type="file"
+              name="coverPhotoUrl"
+              className="update__form-cover-input"
+              id="cover"
+              accept="image/*"
+              onChange={handleCover}
+            />
+            <div className="update__form-cover-button">
+              Modifier la photo de couverture
             </div>
-            <div>
-              <img id="ok" alt="ok" className="update__form-cover-img" />
+          </div>
+          <div
+            className={
+              loadCover === true
+                ? 'update__form-cover-img'
+                : 'update__form-cover-img--close'
+            }
+          >
+            <img id="coverImg" alt="ok" />
+          </div>
+          {/* GESTION PHOTO DE PROFIL */}
+          <div className="update__form-profile">
+            <input
+              type="file"
+              name="profilePhotoUrl"
+              className="update__form-profile-input"
+              id="profile"
+              accept="image/*"
+              onChange={handleProfile}
+            />
+            <div className="update__form-profile-button">
+              Modifier la photo de profil
             </div>
-            {/* GESTION PHOTO DE PROFIL */}
-            <div className="update__form-profile">
-              <input
-                type="file"
-                name="profilePhotoUrl"
-                className="update__form-profile-input"
-                id="profile"
-                accept="image/*"
-                onChange={handleProfile}
-              />
-              <div className="update__form-profile-button">
-                Modifier la photo de profil
-              </div>
-            </div>
-            <div>
-              <img alt="profile" id="okk" />
-            </div>
+          </div>
+          <div
+            className={
+              loadProfile === true
+                ? 'update__form-profile-img'
+                : 'update__form-profile-img--close'
+            }
+          >
+            <img alt="profile" id="profileImg" />
           </div>
           <input
             type="text"

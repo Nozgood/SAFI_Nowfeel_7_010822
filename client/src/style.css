@@ -379,8 +379,10 @@ main {
 .update__form {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   gap: 1rem;
   margin-top: 1rem;
+  padding: 2rem 1rem 1rem 1rem;
 }
 .update__form-files {
   display: flex;
@@ -415,6 +417,29 @@ main {
   color: white;
   border-color: #ffd7d7;
 }
+.update__form-cover-img, .update__form-profile-img {
+  overflow: hidden;
+  width: 100%;
+}
+.update__form-cover-img--close, .update__form-profile-img--close {
+  display: none;
+}
+.update__form-cover-img img, .update__form-profile-img img {
+  width: 100%;
+}
+.update__form-profile-img {
+  align-content: center;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.update__form-profile-img img {
+  border-radius: 100%;
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border: 2px solid white;
+}
 .update__form-surname, .update__form-name {
   padding: 1rem;
   margin: 0.5rem;
@@ -448,14 +473,6 @@ main {
     width: 500px;
   }
 }
-#ok,
-#okk {
-  width: 400px;
-  height: 300px;
-  object-fit: cover;
-  padding: 1rem;
-}
-
 .header {
   display: flex;
 }
