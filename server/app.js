@@ -2,7 +2,7 @@ const express = require('express');
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 const userRoutes = require('./routes/user');
-const multer = require('./middleware/multer-config');
+const path = require('path');
 
 dotenv.config();
 
@@ -13,7 +13,7 @@ app.use(express.json());
 // CORS MANAGEMENT
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
+    res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization, Boundary');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
     next();
 });
@@ -29,9 +29,12 @@ mongoose.connect(process.env.MONGO,
 
 // ALL ROUTES 
 app.use('/api/user', userRoutes);
+app.use('/images', express.static(path.join(__dirname, 'images')));
 
-app.post('/api/test', multer, (req, res) => {
+app.post('/api/test', (req, res) => {
     console.log('test')
     console.log(req.file)
+    console.log(req.files)
 } );
+
 module.exports = app;

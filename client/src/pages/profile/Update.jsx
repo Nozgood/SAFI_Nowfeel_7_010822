@@ -3,14 +3,28 @@ import { AiOutlineArrowLeft } from 'react-icons/ai'
 import { Link } from 'react-router-dom'
 import updateUser from '../../services/updateUser'
 import Header from '../../components/Header/Header'
+import { useEffect } from 'react'
 
 const Update = () => {
+  const formData = new FormData()
+
   const [data, setData] = useState({
     userSurname: '',
     userName: '',
     profilePhotoUrl: '',
     coverPhotoUrl: '',
   })
+
+  useEffect(() => {
+    const userId = localStorage.getItem('userId')
+    fetch('http://localhost:8000/api/user/' + userId)
+      .then((res) => {
+        return res.json()
+      })
+      .then((data) => {
+        setData(data)
+      })
+  }, [])
 
   const [loadCover, setLoadCover] = useState(false)
   const [loadProfile, setLoadProfile] = useState(false)
@@ -24,8 +38,12 @@ const Update = () => {
     })
   }
   // DISPLAY THE NEW COVER PHOTO
-  const handleCover = (e) => {
+  const handleCover = () => {
     const coverChange = document.getElementById('cover').files
+    setData({
+      ...data,
+      coverPhotoUrl: coverChange[0],
+    })
 
     if (coverChange.length > 0) {
       const fileReader = new FileReader()
@@ -35,10 +53,6 @@ const Update = () => {
           .getElementById('coverImg')
           .setAttribute('src', event.target.result)
         setLoadCover(true)
-        setData({
-          ...data,
-          coverPhotoUrl: coverChange[0].name,
-        })
       }
       fileReader.readAsDataURL(coverChange[0])
     }
@@ -49,7 +63,7 @@ const Update = () => {
     const profileChange = document.getElementById('profile').files
     setData({
       ...data,
-      profilePhotoUrl: profileChange[0].name,
+      profilePhotoUrl: profileChange[0],
     })
 
     if (profileChange.length > 0) {
@@ -68,13 +82,20 @@ const Update = () => {
   // UPDATE THE INFOS TO THE DB
   const handleSubmit = (event) => {
     event.preventDefault()
+    formData.append('userSurname', data.userSurname)
+    formData.append('userName', data.userName)
+    formData.append('photos', data.coverPhotoUrl)
+    formData.append('photos', data.profilePhotoUrl)
 
     try {
-      updateUser(data)
+      updateUser(formData)
     } catch (err) {
       console.log(err)
     }
   }
+
+  const userId = localStorage.getItem('userId')
+  const action = 'http://localhost:8000/api/user/' + userId
   return (
     <>
       <Header />
@@ -86,12 +107,14 @@ const Update = () => {
           className="update__form"
           onSubmit={handleSubmit}
           encType="multipart/form-data"
+          id="form"
+          action={action}
         >
           {/* GESTION PHOTO DE COUVERTURE */}
           <div className="update__form-cover">
             <input
               type="file"
-              name="coverPhotoUrl"
+              name="photos"
               className="update__form-cover-input"
               id="cover"
               accept="image/*"
@@ -114,7 +137,7 @@ const Update = () => {
           <div className="update__form-profile">
             <input
               type="file"
-              name="profilePhotoUrl"
+              name="photos"
               className="update__form-profile-input"
               id="profile"
               accept="image/*"

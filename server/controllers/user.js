@@ -2,8 +2,10 @@ const User = require('../models/User');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
+const test = 'http://localhost:3000'
 // SIGNUP FUNCTION
 exports.signup = (req, res, next )=> {
+    console.log(req.body)
     bcrypt.hash(req.body.password, 10)
         .then((hash) => {
             const user = new User({
@@ -12,11 +14,11 @@ exports.signup = (req, res, next )=> {
                 email : req.body.email,
                 password: hash,
                 passwordConfirm : hash,
-                profilePhotoUrl: '',
-                coverPhotoUrl: '',
+                coverPhotoUrl: `${req.protocol}://${req.get('host')}/images/${req.files[0].filename}`,
+                profilePhotoUrl:  `${req.protocol}://${req.get('host')}/images/${req.files[1].filename}`,
             })
             user.save()
-                .then(()=> res.status(201).json({ message : 'utilisateur crée'}))
+                .then(()=> res.status(201).json({ message : `'utilisateur crée, rendez-vous à cette adresse : ${test}`}))
                 .catch((err) => res.status(400).json({ err }));
         })
         .catch((err)=> res.status(500).json({ err }));
@@ -63,13 +65,16 @@ exports.oneUser = ((req, res, next) => {
 });
 
 // PUT USER INFOS FUNCTION
-
 exports.updateUser = ((req, res, next) => {
     console.log(req.file)
     console.log(req.files)
-    const userInfos = req.file ? {
-        ...JSON.parse(req.body.data),
-        coverPhotoUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
+    console.log(req.body)
+
+    const userInfos = req.files ? {
+        coverPhotoUrl: `${req.protocol}://${req.get('host')}/images/${req.files[0].filename}`,
+        profilePhotoUrl: `${req.protocol}://${req.get('host')}/images/${req.files[1].filename}`,
+        userSurname: req.body.userSurname,
+        userName: req.body.userName,
     } : {
         ...req.body
     };
@@ -92,6 +97,7 @@ exports.updateUser = ((req, res, next) => {
         })
         .catch((error)=> res.status(400).json({ error }));
 });
+
 
 // GET ALL USERS (for searchbar)
 

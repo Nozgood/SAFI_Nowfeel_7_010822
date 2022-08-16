@@ -6,14 +6,14 @@ const Test = () => {
   })
 
   const handleChange = (e) => {
+    const { name, value } = e.target
     setData({
-      img: document.getElementById('ok').files,
+      [name]: value,
     })
   }
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    console.log(data)
     fetch('http://localhost:8000/api/test', {
       method: 'POST',
       headers: {
@@ -24,8 +24,13 @@ const Test = () => {
   }
   return (
     <div>
-      <form onSubmit={handleSubmit} encType="multipart/form-data">
-        <input type="file" name="ok" id="ok" onChange={handleChange} />
+      <form
+        encType="multipart/form-data"
+        action="http://localhost:8000/api/test"
+        method="POST"
+      >
+        <input type="file" name="img" id="ok" onChange={handleChange} />
+        <input type="file" name="img" id="ok" onChange={handleChange} />
         <input type="submit" value="ok" />
       </form>
     </div>
