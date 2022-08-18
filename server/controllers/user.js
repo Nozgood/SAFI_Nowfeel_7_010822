@@ -69,15 +69,38 @@ exports.updateUser = ((req, res, next) => {
     console.log(req.file)
     console.log(req.files)
     console.log(req.body)
+    let userInfos = {};
 
-    const userInfos = req.files ? {
-        coverPhotoUrl: `${req.protocol}://${req.get('host')}/images/${req.files[0].filename}`,
-        profilePhotoUrl: `${req.protocol}://${req.get('host')}/images/${req.files[1].filename}`,
-        userSurname: req.body.userSurname,
-        userName: req.body.userName,
-    } : {
-        ...req.body
-    };
+    switch(req.body.whichPhotos) {
+        case 'all' : 
+        userInfos =  {
+            coverPhotoUrl: `${req.protocol}://${req.get('host')}/images/${req.files[0].filename}`,
+            profilePhotoUrl: `${req.protocol}://${req.get('host')}/images/${req.files[1].filename}`,
+            userSurname: req.body.userSurname,
+            userName: req.body.userName,
+        }
+        break;
+        case 'cover' :         
+        userInfos =  {
+            coverPhotoUrl: `${req.protocol}://${req.get('host')}/images/${req.files[0].filename}`,
+            userSurname: req.body.userSurname,
+            userName: req.body.userName,
+        }
+        break;
+        case 'profile' : 
+        userInfos =  {
+            profilePhotoUrl: `${req.protocol}://${req.get('host')}/images/${req.files[0].filename}`,
+            userSurname: req.body.userSurname,
+            userName: req.body.userName,
+        }
+        break;
+        case 'none' :         
+        userInfos =  {
+            userSurname: req.body.userSurname,
+            userName: req.body.userName,
+        }
+        break;
+    }
 
     delete userInfos._userId;
 

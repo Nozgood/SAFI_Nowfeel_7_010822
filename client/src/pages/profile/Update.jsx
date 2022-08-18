@@ -6,8 +6,10 @@ import Header from '../../components/Header/Header'
 import { useEffect } from 'react'
 
 const Update = () => {
+  // INITIATE FORMDATA TO FETCH (MULTER)
   const formData = new FormData()
 
+  // STATE TO GET OLD INFOS
   const [data, setData] = useState({
     userSurname: '',
     userName: '',
@@ -15,6 +17,7 @@ const Update = () => {
     coverPhotoUrl: '',
   })
 
+  // GET THE OLD INFOS
   useEffect(() => {
     const userId = localStorage.getItem('userId')
     fetch('http://localhost:8000/api/user/' + userId)
@@ -22,13 +25,22 @@ const Update = () => {
         return res.json()
       })
       .then((data) => {
-        setData(data)
+        setData({
+          userSurname: data.userSurname,
+          userName: data.userName,
+          profilePhotoUrl: '',
+          coverPhotoUrl: '',
+        })
       })
   }, [])
 
+  console.log(data)
+
+  // STATE TO DISPLAY COVER / PROFILE PHOTO WHEN CHOOSED
   const [loadCover, setLoadCover] = useState(false)
   const [loadProfile, setLoadProfile] = useState(false)
 
+  // UPDATE NAME / USERNAME INFOS
   const handleChange = (e) => {
     const { name, value } = e.target
 
@@ -37,7 +49,8 @@ const Update = () => {
       [name]: value,
     })
   }
-  // DISPLAY THE NEW COVER PHOTO
+
+  // DISPLAY THE NEW COVER PHOTO AND UPDATE STATE
   const handleCover = () => {
     const coverChange = document.getElementById('cover').files
     setData({
@@ -79,7 +92,7 @@ const Update = () => {
     }
   }
 
-  // UPDATE THE INFOS TO THE DB
+  // SEND TO THE DB
   const handleSubmit = (event) => {
     event.preventDefault()
     formData.append('userSurname', data.userSurname)
@@ -87,6 +100,17 @@ const Update = () => {
     formData.append('photos', data.coverPhotoUrl)
     formData.append('photos', data.profilePhotoUrl)
 
+    if (data.coverPhotoUrl !== '' && data.profilePhotoUrl !== '') {
+      formData.append('whichPhotos', 'all')
+    } else if (data.coverPhotoUrl !== '' && data.profilePhotoUrl === '') {
+      formData.append('whichPhotos', 'cover')
+    } else if (data.coverPhotoUrl === '' && data.profilePhotoUrl !== '') {
+      formData.append('whichPhotos', 'profile')
+    } else if (data.coverPhotoUrl === '' && data.profilePhotoUrl === '') {
+      formData.append('whichPhotos', 'none')
+    }
+
+    console.log(formData)
     try {
       updateUser(formData)
     } catch (err) {
@@ -94,8 +118,6 @@ const Update = () => {
     }
   }
 
-  const userId = localStorage.getItem('userId')
-  const action = 'http://localhost:8000/api/user/' + userId
   return (
     <>
       <Header />
@@ -108,7 +130,6 @@ const Update = () => {
           onSubmit={handleSubmit}
           encType="multipart/form-data"
           id="form"
-          action={action}
         >
           {/* GESTION PHOTO DE COUVERTURE */}
           <div className="update__form-cover">
