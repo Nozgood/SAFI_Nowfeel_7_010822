@@ -6,15 +6,6 @@
   max-width: 500px;
   border: 1px solid;
 
-  img {
-    width: 50px;
-    height: 50px;
-    object-fit: cover;
-    border: 1px solid black;
-    border-radius: 100%;
-    background: white;
-  }
-
   form {
     display: flex;
     flex-direction: column;
@@ -23,11 +14,41 @@
   }
 
   &__form {
+    &-file {
+      &--close {
+        display: none;
+      }
+
+      &--open {
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+        background: rgba(0, 0, 0, 0.2);
+        padding: 1rem 0;
+        border-radius: 5px;
+
+        #imgDisplay {
+          object-fit: cover;
+          width: 90%;
+          border-radius: 5px;
+        }
+      }
+    }
     &-text {
       display: flex;
       align-items: center;
       gap: 1rem;
       width: 100%;
+
+      &-img {
+        width: 50px;
+        height: 50px;
+        object-fit: cover;
+        border: 1px solid black;
+        border-radius: 100%;
+        background: white;
+      }
 
       &-input {
         width: 100%;

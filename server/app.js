@@ -2,6 +2,7 @@ const express = require('express');
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 const userRoutes = require('./routes/user');
+const postRoutes = require('./routes/post');
 const path = require('path');
 
 dotenv.config();
@@ -28,13 +29,8 @@ mongoose.connect(process.env.MONGO,
     .catch((err)=> console.log('connexion a mongo echouée'));
 
 // ALL ROUTES 
-app.use('/api/user', userRoutes);
 app.use('/images', express.static(path.join(__dirname, 'images')));
-
-app.post('/api/test', (req, res) => {
-    console.log('test')
-    console.log(req.file)
-    console.log(req.files)
-} );
+app.use('/api/user', userRoutes);
+app.use('/api/post', postRoutes);
 
 module.exports = app;

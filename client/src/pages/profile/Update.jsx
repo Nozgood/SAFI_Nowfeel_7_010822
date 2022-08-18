@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { AiOutlineArrowLeft } from 'react-icons/ai'
 import { Link } from 'react-router-dom'
-import updateUser from '../../services/updateUser'
+import updateUser from '../../services/user/updateUser'
 import Header from '../../components/Header/Header'
 import { useEffect } from 'react'
 

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { AiOutlineArrowLeft } from 'react-icons/ai'
-import login from '../services/login'
+import login from '../services/user/login'
 const Login = () => {
   const [credentials, setCredentials] = useState({
     email: '',
