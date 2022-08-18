@@ -15,14 +15,14 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 const root = ReactDOM.createRoot(document.getElementById('root'))
 const token = localStorage.getItem('token')
 
-if (token === null) {
+if (!token || token === 'undefined') {
   root.render(
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Welcome />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/*" element={<Error />} />
+        <Route path="/*" element={<Welcome />} />
       </Routes>
     </BrowserRouter>
   )

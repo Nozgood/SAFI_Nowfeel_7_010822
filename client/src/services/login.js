@@ -13,7 +13,7 @@ const login = (credentials) => {
       localStorage.setItem('token', data.token, 'isAdmin', data.isAdmin)
       localStorage.setItem('isAdmin', data.isAdmin)
       localStorage.setItem('userId', data.userId)
-      window.location.href = 'http://localhost:3000/profile'
+      window.location.href = 'http://localhost:3000/'
     })
 }
 

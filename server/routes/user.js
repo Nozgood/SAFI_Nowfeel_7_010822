@@ -25,7 +25,7 @@ const upload = multer({ storage: storage });
 
 router.get('/', userCtrl.getUsers);
 router.get('/:id', userCtrl.oneUser);
-router.post('/signup', userCtrl.signup);
+router.post('/signup', upload.array('photos', 2), userCtrl.signup);
 router.post('/login', userCtrl.login);
 router.put('/:id', upload.array('photos', 2),userCtrl.updateUser);
 

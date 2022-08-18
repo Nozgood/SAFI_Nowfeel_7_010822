@@ -30,15 +30,14 @@ const Signup = () => {
   const handleSubmit = (event) => {
     event.preventDefault()
 
-    formData.append('credentials', {
-      userSurname: userInfos.userSurname,
-      userName: userInfos.userName,
-      email: userInfos.email,
-      password: userInfos.password,
-      passwordConfirm: userInfos.passwordConfirm,
-    })
+    formData.append('userSurname', userInfos.userSurname)
+    formData.append('userName', userInfos.userName)
+    formData.append('email', userInfos.email)
+    formData.append('password', userInfos.password)
+    formData.append('passwordConfirm', userInfos.passwordConfirm)
     formData.append('photos', userInfos.coverPhotoUrl)
     formData.append('photos', userInfos.profilePhotoUrl)
+
     try {
       newUser(formData)
     } catch (err) {

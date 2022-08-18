@@ -197,6 +197,7 @@ main {
   display: flex;
   flex-direction: column;
   gap: 3rem;
+  min-height: 100vh;
   height: 100%;
   padding: 2rem;
   background: linear-gradient(#4e5166, 80%, #ffd7d7);
@@ -237,6 +238,7 @@ main {
 }
 .signup__form-cover-img img, .signup__form-profile-img img {
   width: 100%;
+  max-width: 500px;
 }
 .signup__form-profile-img {
   align-content: center;

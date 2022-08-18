@@ -5,7 +5,9 @@ const updateUser = (data) => {
     method: 'PUT',
     body: data,
   })
-    .then(() => console.log('hello'))
+    .then(
+      () => (window.location.href = 'http://localhost:3000/profile/' + userId)
+    )
     .catch((err) => console.log(err))
 }
 

@@ -66,9 +66,6 @@ exports.oneUser = ((req, res, next) => {
 
 // PUT USER INFOS FUNCTION
 exports.updateUser = ((req, res, next) => {
-    console.log(req.file)
-    console.log(req.files)
-    console.log(req.body)
     let userInfos = {};
 
     switch(req.body.whichPhotos) {
@@ -101,8 +98,6 @@ exports.updateUser = ((req, res, next) => {
         }
         break;
     }
-
-    delete userInfos._userId;
 
     User.findOne({
         _id: req.params.id
