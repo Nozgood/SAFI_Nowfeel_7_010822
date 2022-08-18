@@ -1,0 +1,66 @@
+.welcome {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  min-height: 600px;
+  gap: 2rem;
+  padding: 1rem;
+  background: linear-gradient($tertiary-color, 80%, $secondary-color);
+
+  &__title {
+    align-content: center;
+    color: white;
+  }
+
+  &__login-link,
+  &__signup-link {
+    border: 2px solid;
+    width: 90%;
+    padding: 0.8rem;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 0.9rem;
+  }
+
+  &__login {
+    &-link {
+      background: black;
+      border-color: transparent;
+      transition: $transition;
+      color: white;
+
+      &:hover {
+        background: $primary-color;
+        border-color: black;
+        transform: scale(0.9);
+        color: black;
+      }
+    }
+  }
+
+  &__signup {
+    &-link {
+      transition: $transition;
+      background: $secondary-color;
+
+      &:hover {
+        background: $tertiary-color;
+        border-color: $secondary-color;
+        transform: scale(0.9);
+        color: $secondary-color;
+      }
+    }
+  }
+}
+
+// desktop display
+@media screen and (min-width: 1024px) {
+  .welcome {
+    &__signup-link,
+    &__login-link {
+      max-width: 600px;
+    }
+  }
+}

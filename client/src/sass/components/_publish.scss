@@ -1,0 +1,89 @@
+.publish {
+  background: $secondary-color;
+  padding: 0.5rem;
+  margin: 1rem;
+  border-radius: 10px;
+  max-width: 500px;
+  border: 1px solid;
+
+  img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border: 1px solid black;
+    border-radius: 100%;
+    background: white;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: center;
+  }
+
+  &__form {
+    &-text {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      width: 100%;
+
+      &-input {
+        width: 100%;
+        padding: 0.5rem;
+        border-radius: 7px;
+
+        &::placeholder {
+          color: $tertiary-color;
+        }
+      }
+    }
+
+    &-buttons {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-around;
+
+      &-file {
+        &::-webkit-file-upload-button {
+          font-family: 'Lato', sans-serif;
+          background: white;
+          border: 1px solid black;
+          padding: 0.3rem;
+          border-radius: 7px;
+          text-overflow: none;
+          color: $tertiary-color;
+          transition: $transition;
+          margin-bottom: 10px;
+
+          &:hover {
+            background: $tertiary-color;
+            color: $secondary-color;
+            border-color: $secondary-color;
+          }
+        }
+      }
+      &-submit {
+        padding: 0.5rem 1rem;
+        border-radius: 7px;
+        background: $tertiary-color;
+        color: $secondary-color;
+        border: 1px solid transparent;
+        transition: $transition;
+
+        &:hover {
+          border-color: $tertiary-color;
+          color: white;
+          background: $primary-color;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .publish {
+    width: 100vw;
+  }
+}

@@ -1,0 +1,161 @@
+.signup {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  min-height: 100vh;
+  height: 100%;
+  padding: 2rem;
+  background: linear-gradient($tertiary-color, 80%, $secondary-color);
+
+  &__form {
+    &-cover,
+    &-profile {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      &-input {
+        position: absolute;
+        z-index: 1;
+        cursor: pointer;
+        opacity: 0;
+      }
+
+      &-button {
+        border: 1px solid black;
+        padding: 0.5rem;
+        border-radius: 5px;
+        background: $secondary-color;
+        color: black;
+        transition: $transition;
+      }
+
+      &:hover {
+        .update__form-cover-button,
+        .update__form-profile-button {
+          background: $primary-color;
+          color: white;
+          border-color: $secondary-color;
+        }
+      }
+
+      &-img {
+        overflow: hidden;
+        width: 100%;
+        &--close {
+          display: none;
+        }
+
+        img {
+          width: 100%;
+          max-width: 500px;
+        }
+      }
+    }
+
+    &-profile {
+      &-img {
+        align-content: center;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+
+        img {
+          border-radius: 100%;
+          width: 200px;
+          height: 200px;
+          object-fit: cover;
+          border: 2px solid white;
+        }
+      }
+    }
+  }
+
+  &__intro {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    a {
+      width: 20px;
+    }
+
+    &-arrow {
+      border: 1px solid white;
+      border-radius: 3px;
+      font-size: 20px;
+      color: white;
+      transition: $transition;
+
+      &:hover {
+        color: $primary-color;
+        border-color: $primary-color;
+      }
+    }
+    &-title {
+      color: white;
+    }
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 1rem;
+
+    input {
+      width: 100%;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      border-radius: 5px;
+      font-size: 0.9rem;
+    }
+  }
+
+  &__info {
+    background: $tertiary-color;
+    border: 2px solid $secondary-color;
+    transition: $transition;
+    color: white;
+
+    &::placeholder {
+      color: $secondary-color;
+      font-size: 0.9rem;
+    }
+
+    &:focus {
+      background: $secondary-color;
+      border-color: white;
+      color: $tertiary-color;
+    }
+  }
+
+  &__submit {
+    background: white;
+    border-color: transparent;
+    transition: $transition;
+    color: $tertiary-color;
+    border: 2px solid transparent;
+
+    &:hover {
+      background: $primary-color;
+      border-color: black;
+      color: black;
+    }
+  }
+}
+
+@media screen and (min-width: 760px) {
+  .signup {
+    align-items: center;
+
+    &__intro-arrow {
+      position: absolute;
+      left: 5%;
+    }
+    input {
+      min-width: 300px;
+    }
+  }
+}

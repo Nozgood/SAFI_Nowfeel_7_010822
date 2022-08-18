@@ -1,3 +1,19 @@
-body {
-  background: red;
-}
+// VARIABLES / TYPO
+@import './utils/variables';
+@import './base//typography';
+
+// PAGES
+@import './pages/welcome';
+@import './pages//login';
+@import './pages/signup';
+@import './pages/profile';
+@import './pages/update';
+
+// LAYOUTS
+@import './layout/header';
+
+// COMPONENTS
+@import './components/nav';
+@import './components/search';
+@import './components/publish';
+@import './components//publication';

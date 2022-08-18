@@ -1,0 +1,109 @@
+.login {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
+  padding: 2rem;
+  background: linear-gradient($tertiary-color, 80%, $secondary-color);
+
+  &__intro {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    a {
+      width: 20px;
+    }
+
+    &-arrow {
+      border: 1px solid white;
+      border-radius: 3px;
+      font-size: 20px;
+      color: white;
+      transition: $transition;
+
+      &:hover {
+        color: $primary-color;
+        border-color: $primary-color;
+      }
+    }
+    &-title {
+      color: white;
+    }
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 3rem;
+
+    input {
+      width: 100%;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      border-radius: 5px;
+      font-size: 0.9rem;
+    }
+  }
+
+  &__infos {
+    input {
+      background: $tertiary-color;
+      border: 2px solid $secondary-color;
+      transition: $transition;
+      color: white;
+
+      &::placeholder {
+        color: $secondary-color;
+        font-size: 0.9rem;
+      }
+
+      &:focus {
+        background: $secondary-color;
+        border-color: white;
+        color: $tertiary-color;
+      }
+    }
+  }
+
+  &__submit {
+    background: black;
+    border-color: transparent;
+    transition: $transition;
+    color: white;
+    border: 2px solid transparent;
+
+    &:hover {
+      background: $secondary-color;
+      border-color: black;
+      color: black;
+    }
+  }
+
+  &__signup {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+
+    a {
+      transition: $transition;
+
+      &:hover {
+        color: $primary-color;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .login {
+    align-items: center;
+
+    &__intro-arrow {
+      position: absolute;
+      left: 5%;
+    }
+  }
+}

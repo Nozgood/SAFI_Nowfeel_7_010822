@@ -1,0 +1,45 @@
+.search {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+
+  &__back {
+    color: white;
+    font-size: 20px;
+    transition: $transition;
+
+    &:hover {
+      color: $primary-color;
+    }
+  }
+  input {
+    padding: 0.5rem;
+    border-radius: 10px;
+    width: 100%;
+
+    &::placeholder {
+      color: $tertiary-color;
+      padding-left: 0.3rem;
+    }
+  }
+  &__results {
+    margin: 0.3rem 1rem 0 1rem;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 10px;
+
+    &.close {
+      display: none;
+    }
+  }
+
+  &__result {
+    padding: 1rem;
+    a {
+      color: white;
+    }
+  }
+}
