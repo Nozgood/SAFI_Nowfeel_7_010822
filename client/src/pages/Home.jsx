@@ -21,6 +21,7 @@ const Home = () => {
         setData(data)
       })
   }, [])
+
   return (
     <>
       <Header />

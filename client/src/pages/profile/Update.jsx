@@ -1,9 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { AiOutlineArrowLeft } from 'react-icons/ai'
 import { Link } from 'react-router-dom'
 import updateUser from '../../services/user/updateUser'
 import Header from '../../components/Header/Header'
-import { useEffect } from 'react'
 
 const Update = () => {
   // INITIATE FORMDATA TO FETCH (MULTER)
@@ -33,8 +32,6 @@ const Update = () => {
         })
       })
   }, [])
-
-  console.log(data)
 
   // STATE TO DISPLAY COVER / PROFILE PHOTO WHEN CHOOSED
   const [loadCover, setLoadCover] = useState(false)
@@ -110,7 +107,6 @@ const Update = () => {
       formData.append('whichPhotos', 'none')
     }
 
-    console.log(formData)
     try {
       updateUser(formData)
     } catch (err) {

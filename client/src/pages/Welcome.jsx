@@ -2,8 +2,6 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 const Welcome = () => {
-  const token = localStorage.getItem('token')
-
   return (
     <div className="welcome">
       <h1 className="welcome__title">Bienvenue chez Groupomania !</h1>

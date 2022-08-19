@@ -44,7 +44,6 @@ const Publish = ({ data }) => {
 
   const handleImg = () => {
     const imgChange = document.getElementById('img').files
-    console.log(imgChange)
     setPostInfos({
       ...postInfos,
       imgUrl: imgChange[0],
@@ -65,7 +64,6 @@ const Publish = ({ data }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    console.log(postInfos)
     postInfos.Date = realDate
     formData.append('profilePhotoUrl', profilePhotoUrl)
     formData.append('userSurname', userSurname)

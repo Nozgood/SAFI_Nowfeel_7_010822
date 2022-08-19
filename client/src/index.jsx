@@ -19,7 +19,6 @@ if (!token || token === 'undefined') {
   root.render(
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Welcome />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/*" element={<Welcome />} />
