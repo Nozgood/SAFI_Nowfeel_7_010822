@@ -1,13 +1,10 @@
-const axios = require('axios')
-
 const newUser = (userInfos) => {
-  axios({
-    method: 'post',
-    url: 'http://localhost:8000/api/user/signup',
-    data: userInfos,
+  fetch('http://localhost:8000/api/user/signup', {
+    method: 'POST',
+    body: userInfos,
   })
     .then(() => (window.location.href = 'http://localhost:3000'))
-    .catch((err) => console.log(err))
+    .catch((error) => console.log(error))
 }
 
 export default newUser

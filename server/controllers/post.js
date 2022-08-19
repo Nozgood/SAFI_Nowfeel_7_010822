@@ -2,7 +2,6 @@ const Post = require('../models/Post');
 
 // CREATE A POST
 exports.newPost = (req, res, next) => {
-    console.log(req.file)
     const postInfos = req.file ? 
         new Post({
             ...req.body,
