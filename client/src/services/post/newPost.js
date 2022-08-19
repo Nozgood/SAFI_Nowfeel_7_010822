@@ -1,9 +1,9 @@
-const newPost = (infos) => {
+const newPost = (data) => {
   fetch('http://localhost:8000/api/post/newPost', {
     method: 'POST',
-    body: infos,
+    body: data,
   })
-    .then((res) => console.log(res))
+    .then(() => window.location.reload())
     .catch((err) => console.log(err))
 }
 

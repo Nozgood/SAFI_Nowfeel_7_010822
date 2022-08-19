@@ -1,13 +1,32 @@
 import React, { useState } from 'react'
+import newPost from '../../services/post/newPost'
 
 const Publish = ({ data }) => {
   const userId = localStorage.getItem('userId')
 
+  const userSurname = data.userSurname
+  const userName = data.userName
+  const profilePhotoUrl = data.profilePhotoUrl
+
+  const formData = new FormData()
+
+  const date = new Date()
+  const realDate =
+    'le' +
+    ' ' +
+    date.toLocaleDateString('fr-FR') +
+    ' ' +
+    'à' +
+    ' ' +
+    date.getHours() +
+    ':' +
+    date.getMinutes()
+
   const [postInfos, setPostInfos] = useState({
-    profilePhotoUrl: data.userSurname,
+    profilePhotoUrl: profilePhotoUrl,
     userId: userId,
-    userSurname: data.userSurname,
-    userName: data.userName,
+    userSurname: userSurname,
+    userName: userName,
     Date: '',
     content: '',
     imgUrl: '',
@@ -44,10 +63,33 @@ const Publish = ({ data }) => {
     }
   }
 
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    console.log(postInfos)
+    postInfos.Date = realDate
+    formData.append('profilePhotoUrl', profilePhotoUrl)
+    formData.append('userSurname', userSurname)
+    formData.append('userName', userName)
+    formData.append('userId', userId)
+    formData.append('Date', realDate)
+    formData.append('content', postInfos.content)
+    formData.append('photo', postInfos.imgUrl)
+
+    try {
+      newPost(formData)
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
   return (
     <>
       <section className="publish">
-        <form className="publish__form" encType="multipart/form-data">
+        <form
+          className="publish__form"
+          encType="multipart/form-data"
+          onSubmit={handleSubmit}
+        >
           <div className="publish__form-text">
             <img
               src={data.profilePhotoUrl}

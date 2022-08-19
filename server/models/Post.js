@@ -5,7 +5,7 @@ const postSchema = mongoose.Schema({
     userId : { type: String },
     userSurname: { type: String },
     userName: { type: String },
-    Date: { type: Date },
+    Date: { type: String },
     modificationDate: { type: String },
     content: { type: String },
     imgUrl : { type: String },

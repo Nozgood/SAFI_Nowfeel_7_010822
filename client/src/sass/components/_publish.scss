@@ -2,9 +2,7 @@
   background: $secondary-color;
   padding: 0.5rem;
   margin: 1rem;
-  border-radius: 10px;
-  max-width: 500px;
-  border: 1px solid;
+  border-radius: 5px;
 
   form {
     display: flex;
@@ -100,11 +98,5 @@
         }
       }
     }
-  }
-}
-
-@media screen and (min-width: 768px) {
-  .publish {
-    width: 100vw;
   }
 }
