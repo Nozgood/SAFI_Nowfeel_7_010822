@@ -1,4 +1,8 @@
 import React, { useState, useEffect } from 'react'
+import { AiOutlineEdit } from 'react-icons/ai'
+import Popup from 'reactjs-popup'
+import { Link } from 'react-router-dom'
+import deletePost from '../../services/post/deletePost'
 
 const Publication = () => {
   const [posts, setPosts] = useState()
@@ -20,16 +24,55 @@ const Publication = () => {
       <section className="all">
         {loadData === true ? (
           posts.map((post) => {
+            const handleDelete = () => {
+              try {
+                deletePost(post)
+              } catch (error) {
+                console.log(error)
+              }
+            }
+
             return (
               <div key={post._id} className="publication">
                 <div className="publication__infos">
-                  <div className="publication__infos-img">
-                    <img src={post.profilePhotoUrl} alt="profile" />
+                  <div className="publication__infos-static">
+                    <div className="publication__infos-img">
+                      <img src={post.profilePhotoUrl} alt="profile" />
+                    </div>
+                    <div className="publication__infos-text">
+                      <h2>{post.userSurname + ' ' + post.userName}</h2>
+                      <p> {post.Date}</p>
+                    </div>
                   </div>
-                  <div className="publication__infos-text">
-                    <h2>{post.userSurname + ' ' + post.userName}</h2>
-                    <p> {post.Date}</p>
-                  </div>
+                  <Popup
+                    trigger={
+                      <div className="publication__infos-edit">
+                        <AiOutlineEdit className="publication__infos-edit-icon" />
+                      </div>
+                    }
+                    position="right"
+                    on="hover"
+                    closeOnDocumentClick
+                    mouseLeaveDelay={300}
+                    mouseEnterDelay={0}
+                    contentStyle={{ padding: '0px', border: 'none' }}
+                    arrow={false}
+                  >
+                    <div className="publication__infos-edit-popup">
+                      <Link
+                        to="/test"
+                        className="publication__infos-edit-popup-update"
+                      >
+                        Modifier
+                      </Link>
+                      <button
+                        className="publication__infos-edit-popup-delete"
+                        onClick={handleDelete}
+                      >
+                        Supprimer
+                      </button>
+                    </div>
+                  </Popup>
                 </div>
                 <div className="publication__content">
                   <div className="publication__content-text">

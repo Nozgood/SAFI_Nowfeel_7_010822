@@ -1,4 +1,5 @@
 const Post = require('../models/Post');
+const fs = require('fs');
 
 // CREATE A POST
 exports.newPost = (req, res, next) => {
@@ -31,5 +32,22 @@ exports.updatePost = (req, res, next) => {
 };
 // DELETE A POST
 exports.deletePost = (req, res, next) => {
-
+    Post.findOne({
+        _id: req.params.id
+    })
+    .then((post)=> {
+        if (post.imgUrl) {
+            const filename = post.imgUrl.split('/images/')[1];
+            fs.unlink(`images/${filename}`, ()=> {
+            Post.deleteOne({ _id: req.params.id})
+            .then(()=> res.status(200).json({ message: 'post supprimé' }))
+            .catch((error)=> res.status(500).json({ error }))
+        });
+        } else {
+            Post.deleteOne({ _id: req.params.id})
+                .then(()=> res.status(200).json({ message: 'post supprimé' }))
+                .catch((error)=> res.status(500).json({ error }))
+        }
+    })
+    .catch((error)=> res.status(500).json({ error }))
 };
