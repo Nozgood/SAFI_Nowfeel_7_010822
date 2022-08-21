@@ -10,7 +10,8 @@ router.get('/allposts',postCtrl.allPosts);
 router.get('/allposts/:userId', postCtrl.postsByUserId);
 
 // here we use POST ID
-router.put('/updatePost/:id', postCtrl.updatePost);
+router.get('/:id', postCtrl.postById);
+router.put('/updatePost/:id', multer.single('photo'), postCtrl.updatePost);
 router.delete('/delete/:id', postCtrl.deletePost);
 
 module.exports = router;

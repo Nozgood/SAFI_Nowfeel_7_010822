@@ -1,0 +1,132 @@
+import React, { useState, useEffect } from 'react'
+import editPost from '../../services/post/editPost'
+import Header from '../Header/Header'
+
+const EditPost = () => {
+  const [postInfos, setPostInfos] = useState({})
+
+  useEffect(() => {
+    const postId = window.location.href.split(':3000/')[1]
+
+    fetch('http://localhost:8000/api/post/' + postId)
+      .then((res) => {
+        return res.json()
+      })
+      .then((data) => {
+        setPostInfos(data.post[0])
+      })
+      .catch((error) => console.log(error))
+  }, [])
+
+  const formData = new FormData()
+  const date = new Date()
+  const realDate =
+    'Modifié le' +
+    ' ' +
+    date.toLocaleDateString('fr-FR') +
+    ' ' +
+    'à' +
+    ' ' +
+    date.getHours() +
+    ':' +
+    date.getMinutes()
+
+  const handleChange = (e) => {
+    const { name, value } = e.target
+    setPostInfos({
+      ...postInfos,
+      [name]: value,
+    })
+  }
+
+  const handleImg = () => {
+    const imgChange = document.getElementById('img').files
+
+    setPostInfos({
+      ...postInfos,
+      imgUrl: imgChange[0],
+    })
+
+    if (imgChange.length > 0) {
+      const fileReader = new FileReader()
+
+      fileReader.onload = function (event) {
+        document
+          .getElementById('imgDisplay')
+          .setAttribute('src', event.target.result)
+      }
+      fileReader.readAsDataURL(imgChange[0])
+    }
+  }
+
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    postInfos.modificationDate = realDate
+    formData.append('modificationDate', realDate)
+    formData.append('content', postInfos.content)
+    formData.append('photo', postInfos.imgUrl)
+
+    try {
+      editPost(formData)
+    } catch (err) {
+      console.log(err)
+    }
+  }
+  return (
+    <>
+      <Header />
+      <main className="edit">
+        <section className="publish edit">
+          <form
+            className="publish__form"
+            encType="multipart/form-data"
+            onSubmit={handleSubmit}
+          >
+            <div className="publish__form-text">
+              <img
+                alt="profil"
+                className="publish__form-text-img"
+                src={postInfos.profilePhotoUrl}
+              />
+              <input
+                type="text"
+                name="content"
+                placeholder={postInfos.content}
+                id="text"
+                className="publish__form-text-input"
+                onChange={handleChange}
+              />
+            </div>
+            <div className="publish__form-buttons">
+              <input
+                type="file"
+                name="postPhoto"
+                id="img"
+                className="publish__form-buttons-file"
+                onChange={handleImg}
+              />
+              <input
+                type="submit"
+                value="Modifier"
+                className="publish__form-buttons-submit"
+              />
+            </div>
+            <div>
+              {postInfos.imgUrl ? (
+                <img
+                  alt="ok"
+                  id="imgDisplay"
+                  src={postInfos.imgUrl}
+                  className="publish__form-input-img"
+                  onChange={handleImg}
+                />
+              ) : null}
+            </div>
+          </form>
+        </section>
+      </main>
+    </>
+  )
+}
+
+export default EditPost

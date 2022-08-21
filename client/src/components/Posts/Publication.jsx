@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import { AiOutlineEdit } from 'react-icons/ai'
 import Popup from 'reactjs-popup'
-import { Link } from 'react-router-dom'
 import deletePost from '../../services/post/deletePost'
+import { Link } from 'react-router-dom'
 
 const Publication = () => {
   const [posts, setPosts] = useState()
   const [loadData, setLoadData] = useState(false)
 
+  const [popup, setPopup] = useState(false)
   useEffect(() => {
     fetch('http://localhost:8000/api/post/allposts')
       .then((res) => {
@@ -60,7 +61,7 @@ const Publication = () => {
                   >
                     <div className="publication__infos-edit-popup">
                       <Link
-                        to="/test"
+                        to={`/${post._id}`}
                         className="publication__infos-edit-popup-update"
                       >
                         Modifier

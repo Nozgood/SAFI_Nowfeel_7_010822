@@ -9,6 +9,7 @@ import Profile from './pages/Profile/Profile'
 import Update from './pages/Profile/Update'
 import Search from './pages/Search'
 import Test from './pages/Test'
+import EditPost from './components/Posts/editPost'
 import './style.css'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
@@ -30,6 +31,7 @@ if (!token || token === 'undefined') {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/:postId" element={<EditPost />} />
         <Route path="/search" element={<Search />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/profile/:userId" element={<Profile />} />

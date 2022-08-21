@@ -10,8 +10,6 @@ const UserPublication = () => {
 
   useEffect(() => {
     const userId = window.location.href.split('/profile/')[1]
-    console.log(userId)
-
     fetch('http://localhost:8000/api/post/allposts/' + userId)
       .then((res) => {
         return res.json()

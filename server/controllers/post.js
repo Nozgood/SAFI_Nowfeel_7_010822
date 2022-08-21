@@ -22,7 +22,7 @@ exports.allPosts = (req, res, next) => {
         .then((posts)=> res.status(200).json({ posts }))
         .catch((error)=> res.status(400).json({ error }));
 };
-// GET POST(S) BY ID
+// GET POST(S) BY USERID
 exports.postsByUserId = (req, res, next) => {
     Post.find({
         userId: req.params.userId,
@@ -30,9 +30,34 @@ exports.postsByUserId = (req, res, next) => {
     .then((posts) => res.status(200).json({posts}))
     .catch((error) => res.status(500).json({ error }))
 };
+
+// GET SINGLE POST BY POST ID
+exports.postById = (req,res, next) => {
+    Post.find({
+        _id: req.params.id
+    })
+    .then((post)=> res.status(200).json({ post }))
+    .catch((error) => res.status(400).json({ error }))
+};
+
 // UPDATE A POST
 exports.updatePost = (req, res, next) => {
+    console.log(req.body)
+    console.log(req.file)
 
+    const editPost = req.file ? {
+        ...req.body, 
+        imgUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
+    } : {
+        ...req.body,
+    }
+    Post.updateOne({
+        _id: req.params.id
+    }, {
+        ...editPost, _id: req.params.id
+    })
+        .then(() => res.status(200).json({ message : 'post modifié !'}))
+        .catch((error) => res.status(400).json({ error }))
 };
 // DELETE A POST
 exports.deletePost = (req, res, next) => {

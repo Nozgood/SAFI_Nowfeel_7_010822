@@ -7,14 +7,15 @@ import user from '../../assets/user.png'
 import { Link } from 'react-router-dom'
 
 const Profile = () => {
+  const userId = window.location.href.split('/profile/')[1]
+  const localId = localStorage.getItem('userId')
+
   const [data, setData] = useState({
     userSurname: '',
     userName: '',
     profilePhotoUrl: '',
     coverPhotoUrl: '',
   })
-
-  const userId = localStorage.getItem('userId')
 
   useEffect(() => {
     const userId = window.location.href.split('/profile/')[1]
@@ -60,7 +61,7 @@ const Profile = () => {
           </div>
         </section>
         <section className="profile__section profile__publications">
-          <Publish data={data} />
+          {localId === userId ? <Publish data={data} /> : null}
           <UserPublication />
         </section>
       </main>
