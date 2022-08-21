@@ -12,6 +12,7 @@
   flex-direction: column;
   gap: 1rem;
   position: static;
+  min-width: 300px;
 
   &__infos {
     display: flex;
@@ -157,6 +158,18 @@
           background: $secondary-color;
           color: $tertiary-color;
           border-color: $tertiary-color;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 780px) {
+  .publication {
+    &__content {
+      &-img {
+        img {
+          max-width: 100%;
         }
       }
     }

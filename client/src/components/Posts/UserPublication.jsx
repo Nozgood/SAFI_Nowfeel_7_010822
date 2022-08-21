@@ -4,12 +4,15 @@ import Popup from 'reactjs-popup'
 import { Link } from 'react-router-dom'
 import deletePost from '../../services/post/deletePost'
 
-const Publication = () => {
+const UserPublication = () => {
   const [posts, setPosts] = useState()
   const [loadData, setLoadData] = useState(false)
 
   useEffect(() => {
-    fetch('http://localhost:8000/api/post/allposts')
+    const userId = window.location.href.split('/profile/')[1]
+    console.log(userId)
+
+    fetch('http://localhost:8000/api/post/allposts/' + userId)
       .then((res) => {
         return res.json()
       })
@@ -104,4 +107,4 @@ const Publication = () => {
   )
 }
 
-export default Publication
+export default UserPublication

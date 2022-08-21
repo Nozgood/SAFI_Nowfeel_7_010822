@@ -4,7 +4,7 @@ const deletePost = (postInfos) => {
     method: 'delete',
     body: postInfos,
   })
-    .then((res) => console.log(res))
+    .then(() => window.location.reload())
     .catch((error) => console.log(error))
 }
 

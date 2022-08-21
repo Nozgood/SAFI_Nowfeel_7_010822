@@ -25,7 +25,7 @@ const Home = () => {
   return (
     <>
       <Header />
-      <main>
+      <main className="home">
         <Publish data={data} />
         <Publication />
       </main>

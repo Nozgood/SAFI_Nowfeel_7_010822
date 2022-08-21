@@ -23,8 +23,12 @@ exports.allPosts = (req, res, next) => {
         .catch((error)=> res.status(400).json({ error }));
 };
 // GET POST(S) BY ID
-exports.postsById = (req, res, next) => {
-
+exports.postsByUserId = (req, res, next) => {
+    Post.find({
+        userId: req.params.userId,
+    })
+    .then((posts) => res.status(200).json({posts}))
+    .catch((error) => res.status(500).json({ error }))
 };
 // UPDATE A POST
 exports.updatePost = (req, res, next) => {

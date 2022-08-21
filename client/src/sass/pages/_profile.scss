@@ -69,11 +69,25 @@
 
   &__publications {
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
 }
 
 @media screen and (min-width: 1024px) {
   .profile {
     padding-top: 90px;
+  }
+}
+
+@media screen and (min-width: 780px) {
+  .profile {
+    &__publications {
+      .publish {
+        width: 50%;
+      }
+    }
   }
 }

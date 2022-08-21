@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Header from '../../components/Header/Header'
-import Publication from '../../components/Posts/Publication'
+import UserPublication from '../../components/Posts/UserPublication'
 import Publish from '../../components/Posts/Publish'
 import logo from '../../assets/icon-left-font.svg'
 import user from '../../assets/user.png'
@@ -17,7 +17,7 @@ const Profile = () => {
   const userId = localStorage.getItem('userId')
 
   useEffect(() => {
-    const userId = localStorage.getItem('userId')
+    const userId = window.location.href.split('/profile/')[1]
     fetch('http://localhost:8000/api/user/' + userId)
       .then((res) => {
         return res.json()
@@ -61,7 +61,7 @@ const Profile = () => {
         </section>
         <section className="profile__section profile__publications">
           <Publish data={data} />
-          <Publication />
+          <UserPublication />
         </section>
       </main>
     </>
