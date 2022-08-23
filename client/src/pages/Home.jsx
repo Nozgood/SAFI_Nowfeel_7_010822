@@ -21,10 +21,11 @@ const Home = () => {
         setData(data)
       })
   }, [])
+
   return (
     <>
       <Header />
-      <main>
+      <main className="home">
         <Publish data={data} />
         <Publication />
       </main>

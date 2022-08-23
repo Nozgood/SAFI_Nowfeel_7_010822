@@ -2,10 +2,8 @@ const User = require('../models/User');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-const test = 'http://localhost:3000'
 // SIGNUP FUNCTION
 exports.signup = (req, res, next )=> {
-    console.log(req.body)
     bcrypt.hash(req.body.password, 10)
         .then((hash) => {
             const user = new User({
@@ -118,7 +116,6 @@ exports.updateUser = ((req, res, next) => {
 
 
 // GET ALL USERS (for searchbar)
-
 exports.getUsers = (req, res, next) => {
     User.find()
         .then(users => res.status(200).json(users))

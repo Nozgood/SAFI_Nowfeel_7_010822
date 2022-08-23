@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { AiOutlineArrowLeft } from 'react-icons/ai'
-import newUser from '../services/newUser'
+import newUser from '../services/user/newUser'
 
 const Signup = () => {
   const formData = new FormData()

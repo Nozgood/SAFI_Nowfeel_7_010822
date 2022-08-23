@@ -2,11 +2,6 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 const Welcome = () => {
-  const token = localStorage.getItem('token')
-
-  if (token === 'undefined') {
-    alert('les informations que vous avez saisis ne sont pas correctes')
-  }
   return (
     <div className="welcome">
       <h1 className="welcome__title">Bienvenue chez Groupomania !</h1>
