@@ -3,6 +3,8 @@ import { AiOutlineEdit } from 'react-icons/ai'
 import Popup from 'reactjs-popup'
 import deletePost from '../../services/post/deletePost'
 import { Link } from 'react-router-dom'
+import Like from './Like'
+import Comment from './Comment'
 
 const Publication = () => {
   const [posts, setPosts] = useState()
@@ -86,12 +88,8 @@ const Publication = () => {
                   </div>
                 </div>
                 <div className="publication__assets">
-                  <div className="publication__assets-like">
-                    <button>J'aime </button>
-                  </div>
-                  <div className="publication__assets-comment">
-                    <button>Commenter</button>
-                  </div>
+                  <Like postInfos={post} />
+                  <Comment />
                 </div>
                 <div className="publication__comments"></div>
               </div>
