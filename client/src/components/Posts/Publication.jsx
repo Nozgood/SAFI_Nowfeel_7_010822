@@ -8,7 +8,6 @@ const Publication = () => {
   const [posts, setPosts] = useState()
   const [loadData, setLoadData] = useState(false)
 
-  const [popup, setPopup] = useState(false)
   useEffect(() => {
     fetch('http://localhost:8000/api/post/allposts')
       .then((res) => {
@@ -43,6 +42,7 @@ const Publication = () => {
                     <div className="publication__infos-text">
                       <h2>{post.userSurname + ' ' + post.userName}</h2>
                       <p> {post.Date}</p>
+                      <p>{post.modificationDate}</p>
                     </div>
                   </div>
                   <Popup

@@ -4,7 +4,7 @@ const editPost = (postInfos) => {
     method: 'put',
     body: postInfos,
   })
-    .then((res) => console.log(res))
+    .then(() => (window.location.href = 'http://localhost:3000'))
     .catch((error) => console.log(error))
 }
 
