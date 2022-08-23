@@ -123,6 +123,7 @@
   &__assets {
     display: flex;
     justify-content: space-between;
+    align-items: center;
 
     &-like,
     &-comment {
@@ -135,15 +136,14 @@
     }
 
     &-like {
-      button {
-        background: $primary-color;
-        border: 1px solid $tertiary-color;
-        color: white;
+      &-all {
+        display: flex;
+        gap: 0.5rem;
 
-        &:hover {
-          color: $primary-color;
-          background: white;
-          border-color: $primary-color;
+        &-icon {
+          color: red;
+
+          @include like;
         }
       }
     }

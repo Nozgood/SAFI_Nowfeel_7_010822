@@ -1,23 +1,23 @@
 import React, { useState } from 'react'
 import sendLike from '../../services/post/like'
+import { BsHeartFill, BsHeart } from 'react-icons/bs'
 
 const Like = ({ postInfos }) => {
+  const userId = localStorage.getItem('userId')
+  let likes = parseInt(postInfos.likes)
+
   const [like, setLike] = useState(0)
-  const [postIndex, setPostIndex] = useState(
-    postInfos.userLikes.indexOf(postInfos.userId)
+  const [allLikes, setAllLikes] = useState(likes)
+  const [userIndex, setUserIndex] = useState(
+    postInfos.userLikes.indexOf(userId)
   )
 
-  let likes = parseInt(postInfos.likes)
-  const [allLikes, setAllLikes] = useState(likes)
-
   let test = allLikes
-
-  const userId = localStorage.getItem('userId')
 
   const handleLike = () => {
     if (like === 1) {
       setLike(0)
-      setPostIndex(-1)
+      setUserIndex(-1)
 
       setAllLikes(test - 1)
       const likeInfos = {
@@ -31,9 +31,9 @@ const Like = ({ postInfos }) => {
       } catch (err) {
         console.log(err)
       }
-    } else if (like === 0 && postIndex === -1) {
+    } else if (like === 0 && userIndex === -1) {
       setLike(1)
-      setPostIndex(0)
+      setUserIndex(0)
       setAllLikes(test + 1)
 
       const likeInfos = {
@@ -47,8 +47,8 @@ const Like = ({ postInfos }) => {
       } catch (err) {
         console.log(err)
       }
-    } else if (like === 0 && postIndex !== -1) {
-      setPostIndex(-1)
+    } else if (like === 0 && userIndex !== -1) {
+      setUserIndex(-1)
       setAllLikes(test - 1)
 
       const likeInfos = {
@@ -69,12 +69,14 @@ const Like = ({ postInfos }) => {
 
   return (
     <div className="publication__assets-like">
-      {postIndex === -1 ? (
-        <button onClick={handleLike}> J'aime </button>
-      ) : (
-        <button onClick={handleLike}> Je n'aime plus </button>
-      )}
-      <p>{allLikes}</p>
+      <button className="publication__assets-like-all" onClick={handleLike}>
+        {userIndex === -1 ? (
+          <BsHeart className="publication__assets-like-all-icon" />
+        ) : (
+          <BsHeartFill className="publication__assets-like-all-icon" />
+        )}
+        <p>{allLikes}</p>
+      </button>
     </div>
   )
 }
