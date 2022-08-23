@@ -53,7 +53,7 @@ const Publication = () => {
                         <AiOutlineEdit className="publication__infos-edit-icon" />
                       </div>
                     }
-                    position="top"
+                    position="left"
                     on="hover"
                     closeOnDocumentClick
                     mouseLeaveDelay={300}

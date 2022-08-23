@@ -5,6 +5,8 @@ import updateUser from '../../services/user/updateUser'
 import Header from '../../components/Header/Header'
 
 const Update = () => {
+  const userId = localStorage.getItem('userId')
+
   // INITIATE FORMDATA TO FETCH (MULTER)
   const formData = new FormData()
 
@@ -118,7 +120,7 @@ const Update = () => {
     <>
       <Header />
       <main className="update">
-        <Link to="/profile">
+        <Link to={`/profile/${userId}`}>
           <AiOutlineArrowLeft className="update__arrow" />
         </Link>
         <form
