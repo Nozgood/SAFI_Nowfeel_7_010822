@@ -11,7 +11,14 @@ const postSchema = mongoose.Schema({
     imgUrl : { type: String, default: '' },
     likes: { type: Number, default: 0 },
     userLikes: [],
-    comments: [], 
+    comments: [{
+        profilePhotoUrl: { type: String },
+        userSurname: { type: String },
+        userName: { type: String },
+        Date: { type: String },
+        modificationDate: { type: String, default: '' },
+        content: { type: String },
+    },], 
 })
 
 module.exports = mongoose.model('post', postSchema);

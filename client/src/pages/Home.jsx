@@ -27,7 +27,7 @@ const Home = () => {
       <Header />
       <main className="home">
         <Publish data={data} />
-        <Publication />
+        <Publication data={data} />
       </main>
     </>
   )

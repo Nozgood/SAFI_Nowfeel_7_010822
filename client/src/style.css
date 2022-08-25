@@ -806,7 +806,7 @@ main.edit {
 .publication {
   background: #ffd7d7;
   margin: 1rem;
-  padding: 1rem;
+  padding: 1rem 1rem 0.5rem 1rem;
   border-radius: 5px;
   display: flex;
   flex-direction: column;
@@ -963,6 +963,44 @@ main.edit {
   .publish {
     width: 700px;
   }
+}
+.comment {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-radius: 5px;
+}
+.comment__user-img img {
+  width: 30px;
+  height: 30px;
+  object-fit: cover;
+  border-radius: 100%;
+}
+.comment__form {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  gap: 1rem;
+}
+.comment__form-text {
+  padding: 0.5rem;
+  border-radius: 5px;
+}
+.comment__form-text {
+  width: 100%;
+}
+.comment__form-submit {
+  display: flex;
+}
+.comment__form-submit-input {
+  z-index: 1;
+  opacity: 0;
+  cursor: pointer;
+}
+.comment__form-submit-icon {
+  position: absolute;
+  z-index: 0;
 }
 
 /*# sourceMappingURL=style.css.map */

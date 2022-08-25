@@ -97,8 +97,3 @@ exports.setLike = (req, res, next) => {
         .then(()=> res.status(200).json({ message : 'like enregistré '}))
         .catch((error) => res.status(400).json({ error }))
 };
-
-// COMMENTS SYSTEM
-exports.setComment = (req, res, next) => {
-
-};

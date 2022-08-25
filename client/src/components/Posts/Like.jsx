@@ -6,20 +6,23 @@ const Like = ({ postInfos }) => {
   const userId = localStorage.getItem('userId')
   let likes = parseInt(postInfos.likes)
 
+  // STATE TO SET LIKE AND KNOW WHAT TO SEND TO DB
   const [like, setLike] = useState(0)
+  // DISPLAY ALL LIKES ON A POST DYNAMICALLY
   const [allLikes, setAllLikes] = useState(likes)
+  // STATE TO KNOW IF THE USER ALREADY LIKED WHEN PAGE IS RELOADED
   const [userIndex, setUserIndex] = useState(
     postInfos.userLikes.indexOf(userId)
   )
 
-  let test = allLikes
+  let dynamicLikes = allLikes
 
   const handleLike = () => {
     if (like === 1) {
       setLike(0)
       setUserIndex(-1)
 
-      setAllLikes(test - 1)
+      setAllLikes(dynamicLikes - 1)
       const likeInfos = {
         _id: postInfos._id,
         userId: userId,
@@ -34,7 +37,7 @@ const Like = ({ postInfos }) => {
     } else if (like === 0 && userIndex === -1) {
       setLike(1)
       setUserIndex(0)
-      setAllLikes(test + 1)
+      setAllLikes(dynamicLikes + 1)
 
       const likeInfos = {
         _id: postInfos._id,
@@ -49,7 +52,7 @@ const Like = ({ postInfos }) => {
       }
     } else if (like === 0 && userIndex !== -1) {
       setUserIndex(-1)
-      setAllLikes(test - 1)
+      setAllLikes(dynamicLikes - 1)
 
       const likeInfos = {
         _id: postInfos._id,
@@ -64,8 +67,6 @@ const Like = ({ postInfos }) => {
       }
     }
   }
-
-  console.log(likes)
 
   return (
     <div className="publication__assets-like">

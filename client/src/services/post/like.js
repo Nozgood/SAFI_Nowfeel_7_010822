@@ -7,7 +7,7 @@ const sendLike = (infos) => {
     },
     body: JSON.stringify(infos),
   })
-    .then((res) => console.log(res))
+    .then()
     .catch((error) => console.log(error))
 }
 
