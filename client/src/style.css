@@ -948,6 +948,50 @@ main.edit {
   color: #4e5166;
   border-color: #4e5166;
 }
+.publication__comments {
+  border-top: 1px solid #4e5166;
+  padding-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+  width: 100%;
+}
+.publication__comment {
+  width: 100%;
+  padding: 0.2rem;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 5px;
+}
+.publication__comment-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 0.3rem;
+}
+.publication__comment-header-info {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.publication__comment-header-info-text-name {
+  font-size: 0.8rem;
+}
+.publication__comment-header-info-text-date {
+  font-size: 0.5rem;
+}
+.publication__comment-header-info-img img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 100%;
+}
+.publication__comment-content {
+  padding-left: 3rem;
+  padding-bottom: 0.5rem;
+}
+.publication__comment-content p {
+  font-size: 0.9rem;
+}
 
 @media screen and (max-width: 780px) {
   .publication__content-img img {
@@ -969,6 +1013,7 @@ main.edit {
   align-items: center;
   gap: 10px;
   border-radius: 5px;
+  width: 100%;
 }
 .comment__user-img img {
   width: 30px;

@@ -8,6 +8,7 @@ const commentSchema = mongoose.Schema({
     modificationDate: { type: String, default: '' },
     content: { type: String },
     postId: { type: String },
+    userId: { type: String },
 })
 
 module.exports = mongoose.model('comment', commentSchema);

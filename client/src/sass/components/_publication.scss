@@ -162,6 +162,60 @@
       }
     }
   }
+  &__comments {
+    border-top: 1px solid $tertiary-color;
+    padding-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    width: 100%;
+  }
+
+  &__comment {
+    width: 100%;
+    padding: 0.2rem;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 5px;
+
+    &-header {
+      display: flex;
+      justify-content: space-between;
+      padding: 0 0.3rem;
+
+      &-info {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+
+        &-text {
+          &-name {
+            font-size: 0.8rem;
+          }
+          &-date {
+            font-size: 0.5rem;
+          }
+        }
+
+        &-img {
+          img {
+            width: 40px;
+            height: 40px;
+            object-fit: cover;
+            border-radius: 100%;
+          }
+        }
+      }
+    }
+
+    &-content {
+      padding-left: 3rem;
+      padding-bottom: 0.5rem;
+      p {
+        font-size: 0.9rem;
+      }
+    }
+  }
 }
 
 @media screen and (max-width: 780px) {

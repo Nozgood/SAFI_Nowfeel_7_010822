@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { FiSend } from 'react-icons/fi'
 import sendComment from '../../services/post/comment'
 
-const Comment = ({ post, user }) => {
+const Comment = ({ user, post }) => {
   const date = new Date()
   const realDate =
     'le' +

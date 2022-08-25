@@ -11,6 +11,8 @@ const Home = () => {
     coverPhotoUrl: '',
   })
 
+  const [loaded, setLoaded] = useState(false)
+
   useEffect(() => {
     const userId = localStorage.getItem('userId')
     fetch('http://localhost:8000/api/user/' + userId)
@@ -19,16 +21,21 @@ const Home = () => {
       })
       .then((data) => {
         setData(data)
+        setLoaded(true)
       })
   }, [])
 
   return (
     <>
       <Header />
-      <main className="home">
-        <Publish data={data} />
-        <Publication data={data} />
-      </main>
+      {loaded ? (
+        <main className="home">
+          <Publish data={data} />
+          <Publication data={data} />
+        </main>
+      ) : (
+        <div>Loading...</div>
+      )}
     </>
   )
 }
