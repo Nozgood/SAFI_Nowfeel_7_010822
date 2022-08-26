@@ -138,9 +138,19 @@ exports.deleteUser = (req, res, next) => {
                         } else {
                             Post.deleteMany({ userId: req.params.id })
                                 .then(() => {
-                                    User.deleteOne({ _id: req.params.id})
-                                        .then(()=> res.status(200).json({message: 'user supprimé'}))
-                                        .catch((error) => res.status(500).json({ error }))
+                                    User.findOne({ _id: req.params.id}) 
+                                        .then((user) => {
+                                            const profilePhotoName = user.profilePhotoUrl.split('/images/')[1];
+                                            const coverPhotoName = user.coverPhotoUrl.split('/images/')[1];
+                                            fs.unlink(`images/${profilePhotoName}`, () => {
+                                                fs.unlink(`images/${coverPhotoName}`, ()=> {
+                                                    User.deleteOne({ _id: req.params.id})
+                                                        .then(()=> res.status(200).json({message: 'user supprimé'}))
+                                                        .catch((error) => res.status(500).json({ error }))
+                                                })
+                                            })
+                                         })
+                                        .catch((error) => res.status(400).json({ error }))
                                 })
                                 .catch((error) => res.status(500).json({ error }))
                         }
