@@ -8,5 +8,6 @@ router.get('/:id', userCtrl.oneUser);
 router.post('/signup', multer.array('photos', 2), userCtrl.signup);
 router.post('/login', userCtrl.login);
 router.put('/:id', multer.array('photos', 2),userCtrl.updateUser);
+router.delete('/:id', userCtrl.deleteUser)
 
 module.exports = router;

@@ -526,12 +526,69 @@ main {
   border-color: black;
 }
 
+.delete__form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+.delete__form-fields--off, .delete__form-fields--on {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+  transition: all 400ms ease;
+  width: 100%;
+}
+.delete__form-fields--off input, .delete__form-fields--on input {
+  padding: 1rem;
+  border-radius: 5px;
+  width: 100%;
+}
+.delete__form-fields--off-submit, .delete__form-fields--on-submit {
+  font-size: 1rem;
+  color: white;
+  background: black;
+  transition: all 400ms ease;
+  border: 1px solid transparent;
+}
+.delete__form-fields--off-submit:hover, .delete__form-fields--on-submit:hover {
+  background: #fd2d01;
+  border-color: black;
+}
+.delete__form-fields--off {
+  opacity: 0;
+  pointer-events: none;
+}
+.delete__form-button--off, .delete__form-button--on {
+  padding: 1rem;
+  color: white;
+  background: #fd2d01;
+  border: 1px solid black;
+  border-radius: 5px;
+  transition: all 400ms ease;
+  font-size: 1rem;
+}
+.delete__form-button--off:hover, .delete__form-button--on:hover {
+  color: #fd2d01;
+  background: white;
+  border-color: #fd2d01;
+}
+.delete__form-button--off {
+  opacity: 0;
+  height: 0;
+  padding: 0;
+}
+
 @media screen and (min-width: 768px) {
   .update__form {
     align-items: center;
     justify-content: center;
   }
   .update__form-surname, .update__form-name, .update__form-submit {
+    width: 500px;
+  }
+  .delete__form {
     width: 500px;
   }
 }
@@ -776,7 +833,7 @@ main {
   padding: 0.5rem 1rem;
   border-radius: 7px;
   background: #4e5166;
-  color: #ffd7d7;
+  color: white;
   border: 1px solid transparent;
   transition: all 400ms ease;
 }
@@ -1031,6 +1088,9 @@ main.edit {
 .comment__form-text {
   padding: 0.5rem;
   border-radius: 5px;
+}
+.comment__form-text::placeholder {
+  color: #4e5166;
 }
 .comment__form-text {
   width: 100%;

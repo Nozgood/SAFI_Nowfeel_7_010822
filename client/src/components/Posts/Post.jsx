@@ -46,7 +46,7 @@ const Post = ({ user, post }) => {
             <p>{post.modificationDate}</p>
           </div>
         </div>
-        {post.userId === userId || isAdmin === true ? (
+        {post.userId === userId || isAdmin === 'true' ? (
           <Popup
             trigger={
               <div className="publication__infos-edit">

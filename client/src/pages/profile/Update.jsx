@@ -3,6 +3,7 @@ import { AiOutlineArrowLeft } from 'react-icons/ai'
 import { Link } from 'react-router-dom'
 import updateUser from '../../services/user/updateUser'
 import Header from '../../components/Header/Header'
+import DeleteUser from '../../components/Profile/DeleteUser'
 
 const Update = () => {
   const userId = localStorage.getItem('userId')
@@ -195,6 +196,7 @@ const Update = () => {
             className="update__form-submit"
           />
         </form>
+        <DeleteUser />
       </main>
     </>
   )
