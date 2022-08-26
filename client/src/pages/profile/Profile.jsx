@@ -62,7 +62,7 @@ const Profile = () => {
         </section>
         <section className="profile__section profile__publications">
           {localId === userId ? <Publish data={data} /> : null}
-          <UserPublication />
+          <UserPublication user={data} />
         </section>
       </main>
     </>

@@ -101,6 +101,7 @@ const Publish = ({ data }) => {
               id="text"
               className="publish__form-text-input"
               onChange={handleChange}
+              autoComplete="off"
             />
           </div>
           <div className="publish__form-buttons">

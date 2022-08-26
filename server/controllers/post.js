@@ -77,3 +77,23 @@ exports.deletePost = (req, res, next) => {
     })
     .catch((error)=> res.status(500).json({ error }))
 };
+
+// LIKES SYSTEM 
+exports.setLike = (req, res, next) => {
+    const like = req.body.like
+    const userId = req.body.userId
+    like === 1 ? 
+        Post.updateOne({_id: req.params.id}, {
+            $inc: {likes: like },
+            $push: {userLikes: userId},
+        })
+        .then(()=> res.status(200).json({ message : 'like enregistré '}))
+        .catch((error) => res.status(400).json({ error }))
+    : 
+    Post.updateOne({_id: req.params.id}, {
+            $inc: {likes: -1 },
+            $pull: {userLikes: userId},
+        })
+        .then(()=> res.status(200).json({ message : 'like enregistré '}))
+        .catch((error) => res.status(400).json({ error }))
+};

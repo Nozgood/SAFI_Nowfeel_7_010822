@@ -54,11 +54,10 @@ const SearchBar = () => {
           })
           .map((value) => {
             return (
-              <div className="search__result">
+              <div className="search__result" key={value._id}>
                 <Link
                   to={`/profile/${value._id}`}
                   className="search__results-link"
-                  key={value._id}
                 >
                   {value.userName + ' ' + value.userSurname}
                 </Link>

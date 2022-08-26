@@ -14,5 +14,8 @@ router.get('/:id', postCtrl.postById);
 router.put('/updatePost/:id', multer.single('photo'), postCtrl.updatePost);
 router.delete('/delete/:id', postCtrl.deletePost);
 
+// LIKE SYSTEM (with postId)
+router.post('/setLike/:id', postCtrl.setLike);
+
 module.exports = router;
 
