@@ -32,7 +32,7 @@ const Profile = () => {
         setData(data.data)
         setLocalId(data.userId)
       })
-  }, [])
+  }, [token])
 
   const identity = data.userSurname + ' ' + data.userName
 
@@ -68,7 +68,7 @@ const Profile = () => {
         </section>
         <section className="profile__section profile__publications">
           {localId === userId ? <Publish data={data} /> : null}
-          <UserPublication user={data} />
+          <UserPublication user={data} userId={localId} />
         </section>
       </main>
     </>

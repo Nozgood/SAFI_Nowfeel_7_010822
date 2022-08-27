@@ -15,6 +15,7 @@ const Like = ({ postInfos, userId }) => {
   )
 
   console.log(userIndex)
+
   let dynamicLikes = allLikes
 
   const handleLike = () => {

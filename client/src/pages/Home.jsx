@@ -32,7 +32,7 @@ const Home = () => {
         setLoaded(true)
         setUserId(data.userId)
       })
-  }, [])
+  }, [token])
 
   return (
     <>

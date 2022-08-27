@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Post from './Post'
 
-const UserPublication = ({ user }) => {
+const UserPublication = ({ user, userId }) => {
   const [posts, setPosts] = useState()
   const [loadData, setLoadData] = useState(false)
 
@@ -22,7 +22,9 @@ const UserPublication = ({ user }) => {
       <section className="all">
         {loadData === true ? (
           posts.map((post) => {
-            return <Post post={post} user={user} key={post._id} />
+            return (
+              <Post post={post} user={user} key={post._id} userId={userId} />
+            )
           })
         ) : (
           <div>Loading ... </div>

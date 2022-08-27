@@ -39,8 +39,9 @@ const Update = () => {
           profilePhotoUrl: '',
           coverPhotoUrl: '',
         })
+        setUserId(data.userId)
       })
-  }, [])
+  }, [token])
 
   // STATE TO DISPLAY COVER / PROFILE PHOTO WHEN CHOOSED
   const [loadCover, setLoadCover] = useState(false)

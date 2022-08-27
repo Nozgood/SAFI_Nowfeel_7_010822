@@ -30,7 +30,7 @@ const SearchBar = () => {
         return res.json()
       })
       .then((datas) => setDatas(datas.users))
-  }, [])
+  }, [token])
 
   return (
     <>

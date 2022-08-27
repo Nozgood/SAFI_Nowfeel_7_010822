@@ -23,7 +23,7 @@ const Publication = ({ data }) => {
         setUserId(data.userId)
         setLoadData(true)
       })
-  }, [])
+  }, [token])
 
   return (
     <>

@@ -10,7 +10,7 @@ const login = (credentials) => {
       return res.json()
     })
     .then((data) => {
-      localStorage.setItem('token', data.token, 'isAdmin', data.isAdmin)
+      localStorage.setItem('token', data.token)
       localStorage.setItem('isAdmin', data.isAdmin)
       window.location.href = 'http://localhost:3000/'
     })
