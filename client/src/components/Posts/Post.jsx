@@ -7,11 +7,11 @@ import { Link } from 'react-router-dom'
 import deletePost from '../../services/post/deletePost'
 import deleteComment from '../../services/post/deleteComment'
 
-const Post = ({ user, post }) => {
+const Post = ({ user, post, userId }) => {
   const [comments, setComments] = useState([])
-
-  const userId = localStorage.getItem('userId')
   const isAdmin = localStorage.getItem('isAdmin')
+
+  console.log(post.userId)
 
   useEffect(() => {
     const postId = post._id
@@ -85,7 +85,7 @@ const Post = ({ user, post }) => {
         </div>
       </div>
       <div className="publication__assets">
-        <Like postInfos={post} />
+        <Like postInfos={post} userId={userId} />
         <div className="publication__assets-comment">
           <button onClick={focusComment}>Commenter</button>
         </div>

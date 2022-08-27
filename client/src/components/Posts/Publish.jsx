@@ -1,9 +1,7 @@
 import React, { useState } from 'react'
 import newPost from '../../services/post/newPost'
 
-const Publish = ({ data }) => {
-  const userId = localStorage.getItem('userId')
-
+const Publish = ({ data, userId }) => {
   const userSurname = data.userSurname
   const userName = data.userName
   const profilePhotoUrl = data.profilePhotoUrl
@@ -11,6 +9,9 @@ const Publish = ({ data }) => {
   const formData = new FormData()
 
   const date = new Date()
+  const minutes =
+    date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()
+
   const realDate =
     'le' +
     ' ' +
@@ -20,7 +21,7 @@ const Publish = ({ data }) => {
     ' ' +
     date.getHours() +
     ':' +
-    date.getMinutes()
+    minutes
 
   const [postInfos, setPostInfos] = useState({
     profilePhotoUrl: profilePhotoUrl,

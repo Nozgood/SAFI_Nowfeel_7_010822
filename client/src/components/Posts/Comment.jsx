@@ -4,6 +4,9 @@ import sendComment from '../../services/post/comment'
 
 const Comment = ({ user, post }) => {
   const date = new Date()
+  const minutes =
+    date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()
+
   const realDate =
     'le' +
     ' ' +
@@ -13,7 +16,7 @@ const Comment = ({ user, post }) => {
     ' ' +
     date.getHours() +
     ':' +
-    date.getMinutes()
+    minutes
 
   const [comment, setComment] = useState({
     profilePhotoUrl: user.profilePhotoUrl,

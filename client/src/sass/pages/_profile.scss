@@ -14,11 +14,13 @@
 
   &__infos {
     display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: space-around;
     align-items: center;
-    gap: 1.5rem;
+    gap: 2rem;
     border-bottom: 2px solid $secondary-color;
-    padding-bottom: 1rem;
+    padding-bottom: 2rem;
 
     &-content {
       display: flex;
@@ -79,6 +81,12 @@
 @media screen and (min-width: 1024px) {
   .profile {
     padding-top: 90px;
+
+    &__infos {
+      flex-direction: row;
+      justify-content: space-around;
+      align-items: center;
+    }
   }
 }
 

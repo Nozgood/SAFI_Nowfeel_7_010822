@@ -7,9 +7,9 @@ import user from '../../assets/user.png'
 import { Link } from 'react-router-dom'
 
 const Profile = () => {
+  const [localId, setLocalId] = useState()
   const userId = window.location.href.split('/profile/')[1]
-  const localId = localStorage.getItem('userId')
-
+  const token = localStorage.getItem('token')
   const [data, setData] = useState({
     userSurname: '',
     userName: '',
@@ -19,12 +19,18 @@ const Profile = () => {
 
   useEffect(() => {
     const userId = window.location.href.split('/profile/')[1]
-    fetch('http://localhost:8000/api/user/' + userId)
+    fetch('http://localhost:8000/api/user/' + userId, {
+      method: 'GET',
+      headers: {
+        authorization: 'Bearer ' + token,
+      },
+    })
       .then((res) => {
         return res.json()
       })
       .then((data) => {
-        setData(data)
+        setData(data.data)
+        setLocalId(data.userId)
       })
   }, [])
 
@@ -32,7 +38,7 @@ const Profile = () => {
 
   return (
     <>
-      <Header />
+      <Header userId={localId} />
       <main className="profile">
         <section className="profile__section">
           <div className="profile__cover">

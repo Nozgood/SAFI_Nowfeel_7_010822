@@ -12,25 +12,34 @@ const Home = () => {
   })
 
   const [loaded, setLoaded] = useState(false)
+  const [userId, setUserId] = useState()
+
+  const token = localStorage.getItem('token')
 
   useEffect(() => {
-    const userId = localStorage.getItem('userId')
-    fetch('http://localhost:8000/api/user/' + userId)
+    fetch('http://localhost:8000/api/user/getOne', {
+      method: 'GET',
+      headers: {
+        authorization: 'Bearer ' + token,
+      },
+    })
       .then((res) => {
         return res.json()
       })
       .then((data) => {
-        setData(data)
+        console.log(data)
+        setData(data.data)
         setLoaded(true)
+        setUserId(data.userId)
       })
   }, [])
 
   return (
     <>
-      <Header />
+      <Header userId={userId} />
       {loaded ? (
         <main className="home">
-          <Publish data={data} />
+          <Publish data={data} userId={userId} />
           <Publication data={data} />
         </main>
       ) : (

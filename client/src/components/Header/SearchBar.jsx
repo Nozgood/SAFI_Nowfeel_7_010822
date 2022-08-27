@@ -7,6 +7,8 @@ const SearchBar = () => {
   const [searchTerm, setSearchTerm] = useState('')
   const [showResults, setShowResults] = useState(false)
 
+  const token = localStorage.getItem('token')
+
   const handleSearchTerm = (e) => {
     let value = e.target.value
     if (value.length > 2) {
@@ -18,11 +20,16 @@ const SearchBar = () => {
   }
 
   useEffect(() => {
-    fetch('http://localhost:8000/api/user/')
+    fetch('http://localhost:8000/api/user/', {
+      method: 'GET',
+      headers: {
+        authorization: 'Bearer ' + token,
+      },
+    })
       .then((res) => {
         return res.json()
       })
-      .then((datas) => setDatas(datas))
+      .then((datas) => setDatas(datas.users))
   }, [])
 
   return (

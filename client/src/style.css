@@ -342,11 +342,13 @@ main {
 }
 .profile__infos {
   display: flex;
+  flex-direction: column;
+  align-items: center;
   justify-content: space-around;
   align-items: center;
-  gap: 1.5rem;
+  gap: 2rem;
   border-bottom: 2px solid #ffd7d7;
-  padding-bottom: 1rem;
+  padding-bottom: 2rem;
 }
 .profile__infos-content {
   display: flex;
@@ -397,6 +399,11 @@ main {
 @media screen and (min-width: 1024px) {
   .profile {
     padding-top: 90px;
+  }
+  .profile__infos {
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
   }
 }
 @media screen and (min-width: 780px) {
@@ -622,6 +629,9 @@ main {
 .nav__logo {
   max-width: 30%;
   min-width: 150px;
+}
+.nav__logo img {
+  width: 100%;
 }
 .nav__list {
   display: flex;

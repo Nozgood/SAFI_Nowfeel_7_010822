@@ -1,8 +1,13 @@
 // TO FETCH PUT ROUTE ON USER
 const updateUser = (data) => {
-  const userId = localStorage.getItem('userId')
+  const token = localStorage.getItem('token')
+  const userId = window.location.href.split('/update/')[1]
+
   fetch('http://localhost:8000/api/user/' + userId, {
     method: 'PUT',
+    headers: {
+      authorization: 'Bearer ' + token,
+    },
     body: data,
   })
     .then(

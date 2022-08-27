@@ -1,10 +1,11 @@
 import React from 'react'
 import Nav from './Nav'
 
-const Header = () => {
+const Header = (userId) => {
+  console.log(userId)
   return (
     <header>
-      <Nav />
+      <Nav userId={userId} />
     </header>
   )
 }

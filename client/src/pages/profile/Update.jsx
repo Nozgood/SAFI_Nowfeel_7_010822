@@ -6,7 +6,8 @@ import Header from '../../components/Header/Header'
 import DeleteUser from '../../components/Profile/DeleteUser'
 
 const Update = () => {
-  const userId = localStorage.getItem('userId')
+  const token = localStorage.getItem('token')
+  const [userId, setUserId] = useState()
 
   // INITIATE FORMDATA TO FETCH (MULTER)
   const formData = new FormData()
@@ -21,15 +22,20 @@ const Update = () => {
 
   // GET THE OLD INFOS
   useEffect(() => {
-    const userId = localStorage.getItem('userId')
-    fetch('http://localhost:8000/api/user/' + userId)
+    fetch('http://localhost:8000/api/user/getOne', {
+      method: 'GET',
+      headers: {
+        authorization: 'Bearer ' + token,
+      },
+    })
       .then((res) => {
         return res.json()
       })
       .then((data) => {
+        console.log(data)
         setData({
-          userSurname: data.userSurname,
-          userName: data.userName,
+          userSurname: data.data.userSurname,
+          userName: data.data.userName,
           profilePhotoUrl: '',
           coverPhotoUrl: '',
         })
