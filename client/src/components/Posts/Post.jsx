@@ -8,6 +8,7 @@ import deleteComment from '../../services/post/deleteComment'
 
 const Post = ({ user, post, userId, setReload, reload }) => {
   const [comments, setComments] = useState([])
+  const [postReload, setPostReload] = useState(0)
   const isAdmin = localStorage.getItem('isAdmin')
 
   const postId = post._id
@@ -17,7 +18,7 @@ const Post = ({ user, post, userId, setReload, reload }) => {
       .then((res) => res.json())
       .then((data) => setComments(data.comments))
       .catch((error) => console.log(error))
-  }, [postId])
+  }, [postId, postReload])
 
   const handleDelete = () => {
     try {
@@ -99,7 +100,15 @@ const Post = ({ user, post, userId, setReload, reload }) => {
         {comments.map((comment) => {
           const handleDeleteComment = () => {
             try {
-              deleteComment(comment)
+              fetch('http://localhost:8000/api/comment/' + comment._id, {
+                method: 'delete',
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(comment),
+              })
+                .then(() => setPostReload(postReload + 1))
+                .catch((error) => console.log(error))
             } catch (error) {
               console.log(error)
             }
@@ -154,7 +163,12 @@ const Post = ({ user, post, userId, setReload, reload }) => {
             </div>
           )
         })}
-        <Comment post={post} user={user} />
+        <Comment
+          post={post}
+          user={user}
+          postReload={postReload}
+          setPostReload={setPostReload}
+        />
       </div>
     </div>
   )

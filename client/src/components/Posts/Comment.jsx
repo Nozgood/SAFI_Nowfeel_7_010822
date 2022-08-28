@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import { FiSend } from 'react-icons/fi'
-import sendComment from '../../services/post/comment'
 
-const Comment = ({ user, post }) => {
+const Comment = ({ user, post, postReload, setPostReload }) => {
   const date = new Date()
   const minutes =
     date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()
 
+  const input = document.getElementById(`${post._id}`)
   const realDate =
     'le' +
     ' ' +
@@ -38,7 +38,18 @@ const Comment = ({ user, post }) => {
     event.preventDefault()
 
     try {
-      sendComment(comment)
+      fetch('http://localhost:8000/api/comment/' + post._id, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(comment),
+      })
+        .then(() => {
+          input.value = ''
+          setPostReload(postReload + 1)
+        })
+        .catch((error) => console.log(error))
     } catch (error) {
       console.log(error)
     }
@@ -51,7 +62,11 @@ const Comment = ({ user, post }) => {
             <img src={user.profilePhotoUrl} alt="user profile" />
           </div>
         </div>
-        <form className="comment__form" onSubmit={handleSubmit}>
+        <form
+          className="comment__form"
+          onSubmit={handleSubmit}
+          id="commentForm"
+        >
           <input
             type="text"
             name="content"
