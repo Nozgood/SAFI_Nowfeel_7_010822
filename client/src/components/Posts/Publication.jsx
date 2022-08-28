@@ -29,18 +29,22 @@ const Publication = ({ data, homeReload }) => {
     <>
       <section className="all">
         {loadData === true ? (
-          posts.map((post) => {
-            return (
-              <Post
-                post={post}
-                user={data}
-                userId={userId}
-                key={post._id}
-                setReload={setReload}
-                reload={reload}
-              />
-            )
-          })
+          posts.length !== 0 ? (
+            posts.map((post) => {
+              return (
+                <Post
+                  post={post}
+                  user={data}
+                  userId={userId}
+                  key={post._id}
+                  setReload={setReload}
+                  reload={reload}
+                />
+              )
+            })
+          ) : (
+            <div> Aucune publication pour le moment ... </div>
+          )
         ) : (
           <div>Loading ... </div>
         )}
