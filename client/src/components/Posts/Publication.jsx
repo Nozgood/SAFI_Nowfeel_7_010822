@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import Post from './Post'
 
-const Publication = ({ data }) => {
+const Publication = ({ data, homeReload }) => {
   const [posts, setPosts] = useState()
   const [loadData, setLoadData] = useState(false)
   const [userId, setUserId] = useState()
-
-  const token = localStorage.getItem('token')
+  const [reload, setReload] = useState(0)
 
   useEffect(() => {
+    const token = localStorage.getItem('token')
     fetch('http://localhost:8000/api/post/allposts', {
       method: 'GET',
       headers: {
@@ -23,7 +23,7 @@ const Publication = ({ data }) => {
         setUserId(data.userId)
         setLoadData(true)
       })
-  }, [token])
+  }, [reload, homeReload])
 
   return (
     <>
@@ -31,7 +31,14 @@ const Publication = ({ data }) => {
         {loadData === true ? (
           posts.map((post) => {
             return (
-              <Post post={post} user={data} userId={userId} key={post._id} />
+              <Post
+                post={post}
+                user={data}
+                userId={userId}
+                key={post._id}
+                setReload={setReload}
+                reload={reload}
+              />
             )
           })
         ) : (

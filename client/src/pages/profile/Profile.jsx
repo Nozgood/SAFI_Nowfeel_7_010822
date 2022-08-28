@@ -8,14 +8,15 @@ import { Link } from 'react-router-dom'
 
 const Profile = () => {
   const [localId, setLocalId] = useState()
-  const userId = window.location.href.split('/profile/')[1]
-  const token = localStorage.getItem('token')
+  const [reload, setReload] = useState(0)
   const [data, setData] = useState({
     userSurname: '',
     userName: '',
     profilePhotoUrl: '',
     coverPhotoUrl: '',
   })
+  const userId = window.location.href.split('/profile/')[1]
+  const token = localStorage.getItem('token')
 
   useEffect(() => {
     const userId = window.location.href.split('/profile/')[1]
@@ -67,8 +68,19 @@ const Profile = () => {
           </div>
         </section>
         <section className="profile__section profile__publications">
-          {localId === userId ? <Publish data={data} /> : null}
-          <UserPublication user={data} userId={localId} />
+          {localId === userId ? (
+            <Publish
+              data={data}
+              userId={userId}
+              reload={reload}
+              setReload={setReload}
+            />
+          ) : null}
+          <UserPublication
+            user={data}
+            userId={localId}
+            profileReload={reload}
+          />
         </section>
       </main>
     </>

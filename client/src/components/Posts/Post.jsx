@@ -4,26 +4,31 @@ import Comment from './Comment'
 import Popup from 'reactjs-popup'
 import { AiOutlineEdit } from 'react-icons/ai'
 import { Link } from 'react-router-dom'
-import deletePost from '../../services/post/deletePost'
 import deleteComment from '../../services/post/deleteComment'
 
-const Post = ({ user, post, userId }) => {
+const Post = ({ user, post, userId, setReload, reload }) => {
   const [comments, setComments] = useState([])
   const isAdmin = localStorage.getItem('isAdmin')
 
-  console.log(post.userId)
+  const postId = post._id
 
   useEffect(() => {
-    const postId = post._id
     fetch('http://localhost:8000/api/comment/' + postId)
       .then((res) => res.json())
       .then((data) => setComments(data.comments))
       .catch((error) => console.log(error))
-  }, [post._id])
+  }, [postId])
 
   const handleDelete = () => {
     try {
-      deletePost(post)
+      fetch('http://localhost:8000/api/post/delete/' + postId, {
+        method: 'delete',
+        body: post,
+      })
+        .then(() => {
+          setReload(reload + 1)
+        })
+        .catch((error) => console.log(error))
     } catch (error) {
       console.log(error)
     }
