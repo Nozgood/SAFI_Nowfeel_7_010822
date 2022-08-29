@@ -70,7 +70,7 @@ const Signup = () => {
       regex.password === false ||
       regex.passwordConfirm === false
     ) {
-      alert('Veuillez remplir tous les champs')
+      alert('Veuillez remplir tous les champs correctement')
     } else {
       formData.append('userSurname', userInfos.userSurname)
       formData.append('userName', userInfos.userName)

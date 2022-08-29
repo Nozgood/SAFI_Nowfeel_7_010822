@@ -1,4 +1,8 @@
 .update {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
   &__arrow {
     position: absolute;
     left: 5%;
