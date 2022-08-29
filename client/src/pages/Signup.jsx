@@ -4,6 +4,11 @@ import { AiOutlineArrowLeft } from 'react-icons/ai'
 import newUser from '../services/user/newUser'
 
 const Signup = () => {
+  // REGEX VALIDATION
+  const regName = /^[a-zA-Zéèêëàâæáäîïôœöùûü]+$/
+  const regMail = /[a-z0-9]+@[a-z]+\.[a-z]{2,3}$/
+  const regPassword = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/
+
   const formData = new FormData()
 
   const [userInfos, setUserInfos] = useState({
@@ -16,32 +21,70 @@ const Signup = () => {
     profilePhotoUrl: '',
   })
 
+  const [regex, setRegex] = useState({
+    userSurname: '',
+    userName: '',
+    email: '',
+    password: '',
+    passwordConfirm: '',
+  })
+
   const [loadCover, setLoadCover] = useState(false)
   const [loadProfile, setLoadProfile] = useState(false)
 
-  const handleChange = (e) => {
-    const { name, value } = e.target
+  const handleRegex = (regexName, value, name) => {
+    const testReg = regexName.test(value)
+
+    setRegex({
+      ...regex,
+      [name]: testReg,
+    })
     setUserInfos({
       ...userInfos,
       [name]: value,
     })
   }
 
+  const handleChange = (e) => {
+    const { name, value } = e.target
+    if (name === 'userSurname') {
+      handleRegex(regName, value, name)
+    } else if (name === 'userName') {
+      handleRegex(regName, value, name)
+    } else if (name === 'email') {
+      handleRegex(regMail, value, name)
+    } else if (name === 'password') {
+      handleRegex(regPassword, value, name)
+    } else if (name === 'passwordConfirm') {
+      handleRegex(regPassword, value, name)
+    }
+  }
+
   const handleSubmit = (event) => {
     event.preventDefault()
 
-    formData.append('userSurname', userInfos.userSurname)
-    formData.append('userName', userInfos.userName)
-    formData.append('email', userInfos.email)
-    formData.append('password', userInfos.password)
-    formData.append('passwordConfirm', userInfos.passwordConfirm)
-    formData.append('photos', userInfos.coverPhotoUrl)
-    formData.append('photos', userInfos.profilePhotoUrl)
+    if (
+      regex.userSurname === false ||
+      regex.userName === false ||
+      regex.email === false ||
+      regex.password === false ||
+      regex.passwordConfirm === false
+    ) {
+      alert('Veuillez remplir tous les champs')
+    } else {
+      formData.append('userSurname', userInfos.userSurname)
+      formData.append('userName', userInfos.userName)
+      formData.append('email', userInfos.email)
+      formData.append('password', userInfos.password)
+      formData.append('passwordConfirm', userInfos.passwordConfirm)
+      formData.append('photos', userInfos.coverPhotoUrl)
+      formData.append('photos', userInfos.profilePhotoUrl)
 
-    try {
-      newUser(formData)
-    } catch (err) {
-      console.log(err)
+      try {
+        newUser(formData)
+      } catch (err) {
+        console.log(err)
+      }
     }
   }
 
@@ -102,6 +145,15 @@ const Signup = () => {
           className="signup__info"
           onChange={handleChange}
         />
+        <div
+          className={
+            regex.userSurname === false
+              ? 'signup__info-invalid--on'
+              : 'signup__info-invalid--off'
+          }
+        >
+          Le prénom saisi n'est pas valide...
+        </div>
         <input
           type="text"
           name="userName"
@@ -109,6 +161,15 @@ const Signup = () => {
           className="signup__info"
           onChange={handleChange}
         />
+        <div
+          className={
+            regex.userName === false
+              ? 'signup__info-invalid--on'
+              : 'signup__info-invalid--off'
+          }
+        >
+          Le nom saisi n'est pas valide...
+        </div>
         <input
           type="email"
           name="email"
@@ -116,6 +177,15 @@ const Signup = () => {
           className="signup__info"
           onChange={handleChange}
         />
+        <div
+          className={
+            regex.email === false
+              ? 'signup__info-invalid--on'
+              : 'signup__info-invalid--off'
+          }
+        >
+          L'adresse mail saisi n'est pas conforme...
+        </div>
         <input
           type="password"
           name="password"
@@ -123,6 +193,16 @@ const Signup = () => {
           className="signup__info"
           onChange={handleChange}
         />
+        <div
+          className={
+            regex.password === false
+              ? 'signup__info-invalid--on'
+              : 'signup__info-invalid--off'
+          }
+        >
+          Mot de passe invalide (au moins 8 caractères, une lettre et un nombre
+          minimum)
+        </div>
         <input
           type="password"
           name="passwordConfirm"
@@ -130,6 +210,16 @@ const Signup = () => {
           className="signup__info"
           onChange={handleChange}
         />
+        <div
+          className={
+            regex.passwordConfirm === false
+              ? 'signup__info-invalid--on'
+              : 'signup__info-invalid--off'
+          }
+        >
+          Confirmation invalide (au moins 8 caractères, une lettre et un nombre
+          minimum)
+        </div>
         <div className="signup__form-cover">
           <input
             type="file"

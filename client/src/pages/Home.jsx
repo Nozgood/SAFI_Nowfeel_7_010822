@@ -47,7 +47,7 @@ const Home = () => {
           <Publication data={data} homeReload={reload} setReload={setReload} />
         </main>
       ) : (
-        <div>Loading...</div>
+        <div className="home__loading">Loading...</div>
       )}
     </>
   )

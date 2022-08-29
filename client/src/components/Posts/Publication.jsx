@@ -43,7 +43,9 @@ const Publication = ({ data, homeReload }) => {
               )
             })
           ) : (
-            <div> Aucune publication pour le moment ... </div>
+            <div className="publication__none">
+              Aucune publication pour le moment ...
+            </div>
           )
         ) : (
           <div>Loading ... </div>

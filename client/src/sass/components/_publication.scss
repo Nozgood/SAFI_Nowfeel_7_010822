@@ -1,6 +1,8 @@
 .all {
   display: flex;
   flex-direction: column-reverse;
+  align-items: center;
+  width: 100%;
 }
 
 .publication {
@@ -13,6 +15,7 @@
   gap: 1rem;
   position: static;
   min-width: 300px;
+  width: 50%;
 
   &__infos {
     display: flex;
@@ -190,10 +193,11 @@
 
         &-text {
           &-name {
-            font-size: 0.8rem;
+            font-size: 0.9rem;
+            font-weight: bold;
           }
           &-date {
-            font-size: 0.5rem;
+            font-size: 0.7rem;
           }
         }
 
@@ -215,6 +219,10 @@
         font-size: 0.9rem;
       }
     }
+  }
+
+  &__none {
+    color: white;
   }
 }
 
