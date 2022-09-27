@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const fs = require('fs');
 const Post = require('../models/Post')
+const Comment = require('../models/Comment');
 
 // SIGNUP FUNCTION
 exports.signup = (req, res, next )=> {
@@ -140,7 +141,11 @@ exports.deleteUser = (req, res, next) => {
                                 profilePhotoUrl: '',
                             })
                                 .then(() => {
-                                    User.findOne({ _id: req.params.id, email: req.body.email }) 
+                                    Comment.updateMany({ userId: req.params.id }, {
+                                        profilePhotoUrl: '',
+                                    })
+                                    .then(()=> {
+                                        User.findOne({ _id: req.params.id, email: req.body.email }) 
                                         .then((user) => {
                                             const profilePhotoName = user.profilePhotoUrl.split('/images/')[1];
                                             const coverPhotoName = user.coverPhotoUrl.split('/images/')[1];
@@ -154,6 +159,8 @@ exports.deleteUser = (req, res, next) => {
                                          })
                                         .catch((error) => res.status(400).json({ error }))
                                 })
+                                    })
+                                    .catch((error)=> res.status(500).json({ error }))
                                 .catch((error) => res.status(500).json({ error }))
                         }
                     })

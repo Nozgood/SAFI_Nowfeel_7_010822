@@ -126,7 +126,14 @@ const Post = ({ user, post, userId, setReload, reload }) => {
               <div className="publication__comment-header">
                 <div className="publication__comment-header-info">
                   <div className="publication__comment-header-info-img">
-                    <img src={comment.profilePhotoUrl} alt="profile" />
+                    <img
+                      src={
+                        comment.profilePhotoUrl === ''
+                          ? defaultPhoto
+                          : comment.profilePhotoUrl
+                      }
+                      alt="profile"
+                    />
                   </div>
                   <div className="publication__comment-header-info-text">
                     <p className="publication__comment-header-info-text-name">
