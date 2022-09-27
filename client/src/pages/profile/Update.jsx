@@ -32,7 +32,6 @@ const Update = () => {
         return res.json()
       })
       .then((data) => {
-        console.log(data)
         setData({
           userSurname: data.data.userSurname,
           userName: data.data.userName,
@@ -210,14 +209,14 @@ const Update = () => {
           <input
             type="text"
             name="userSurname"
-            placeholder="Prénom..."
+            placeholder={data.userSurname}
             className="update__form-surname"
             onChange={handleChange}
           />
           <input
             type="text"
             name="userName"
-            placeholder="Nom..."
+            placeholder={data.userName}
             className="update__form-name"
             onChange={handleChange}
           />

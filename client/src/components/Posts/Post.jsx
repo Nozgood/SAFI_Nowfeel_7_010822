@@ -3,6 +3,7 @@ import Like from './Like'
 import Comment from './Comment'
 import Popup from 'reactjs-popup'
 import { AiOutlineEdit } from 'react-icons/ai'
+import { TiDelete } from 'react-icons/ti'
 import { Link } from 'react-router-dom'
 import deleteComment from '../../services/post/deleteComment'
 import defaultPhoto from '../../assets/user.png'
@@ -149,7 +150,7 @@ const Post = ({ user, post, userId, setReload, reload }) => {
                     <Popup
                       trigger={
                         <div className="publication__infos-edit">
-                          <AiOutlineEdit className="publication__infos-edit-icon" />
+                          <TiDelete className="publication__infos-edit-icon" />
                         </div>
                       }
                       position="left"
