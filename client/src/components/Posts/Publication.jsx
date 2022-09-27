@@ -1,28 +1,52 @@
 import React, { useState, useEffect } from 'react'
 import Post from './Post'
 
-const Publication = ({ data }) => {
+const Publication = ({ data, homeReload }) => {
   const [posts, setPosts] = useState()
   const [loadData, setLoadData] = useState(false)
+  const [userId, setUserId] = useState()
+  const [reload, setReload] = useState(0)
 
   useEffect(() => {
-    fetch('http://localhost:8000/api/post/allposts')
+    const token = localStorage.getItem('token')
+    fetch('http://localhost:8000/api/post/allposts', {
+      method: 'GET',
+      headers: {
+        authorization: 'Bearer ' + token,
+      },
+    })
       .then((res) => {
         return res.json()
       })
       .then((data) => {
         setPosts(data.posts)
+        setUserId(data.userId)
         setLoadData(true)
       })
-  }, [])
+  }, [reload, homeReload])
 
   return (
     <>
       <section className="all">
         {loadData === true ? (
-          posts.map((post) => {
-            return <Post post={post} user={data} key={post._id} />
-          })
+          posts.length !== 0 ? (
+            posts.map((post) => {
+              return (
+                <Post
+                  post={post}
+                  user={data}
+                  userId={userId}
+                  key={post._id}
+                  setReload={setReload}
+                  reload={reload}
+                />
+              )
+            })
+          ) : (
+            <div className="publication__none">
+              Aucune publication pour le moment ...
+            </div>
+          )
         ) : (
           <div>Loading ... </div>
         )}

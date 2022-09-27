@@ -3,27 +3,35 @@ import Like from './Like'
 import Comment from './Comment'
 import Popup from 'reactjs-popup'
 import { AiOutlineEdit } from 'react-icons/ai'
+import { TiDelete } from 'react-icons/ti'
 import { Link } from 'react-router-dom'
-import deletePost from '../../services/post/deletePost'
 import deleteComment from '../../services/post/deleteComment'
+import defaultPhoto from '../../assets/user.png'
 
-const Post = ({ user, post }) => {
+const Post = ({ user, post, userId, setReload, reload }) => {
   const [comments, setComments] = useState([])
-
-  const userId = localStorage.getItem('userId')
+  const [postReload, setPostReload] = useState(0)
   const isAdmin = localStorage.getItem('isAdmin')
 
+  const postId = post._id
+
   useEffect(() => {
-    const postId = post._id
     fetch('http://localhost:8000/api/comment/' + postId)
       .then((res) => res.json())
       .then((data) => setComments(data.comments))
       .catch((error) => console.log(error))
-  }, [post._id])
+  }, [postId, postReload])
 
   const handleDelete = () => {
     try {
-      deletePost(post)
+      fetch('http://localhost:8000/api/post/delete/' + postId, {
+        method: 'delete',
+        body: post,
+      })
+        .then(() => {
+          setReload(reload + 1)
+        })
+        .catch((error) => console.log(error))
     } catch (error) {
       console.log(error)
     }
@@ -38,7 +46,14 @@ const Post = ({ user, post }) => {
       <div className="publication__infos">
         <div className="publication__infos-static">
           <div className="publication__infos-img">
-            <img src={post.profilePhotoUrl} alt="profile" />
+            <img
+              src={
+                post.profilePhotoUrl === ''
+                  ? defaultPhoto
+                  : post.profilePhotoUrl
+              }
+              alt="profile"
+            />
           </div>
           <div className="publication__infos-text">
             <h2>{post.userSurname + ' ' + post.userName}</h2>
@@ -85,7 +100,7 @@ const Post = ({ user, post }) => {
         </div>
       </div>
       <div className="publication__assets">
-        <Like postInfos={post} />
+        <Like postInfos={post} userId={userId} />
         <div className="publication__assets-comment">
           <button onClick={focusComment}>Commenter</button>
         </div>
@@ -94,7 +109,15 @@ const Post = ({ user, post }) => {
         {comments.map((comment) => {
           const handleDeleteComment = () => {
             try {
-              deleteComment(comment)
+              fetch('http://localhost:8000/api/comment/' + comment._id, {
+                method: 'delete',
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(comment),
+              })
+                .then(() => setPostReload(postReload + 1))
+                .catch((error) => console.log(error))
             } catch (error) {
               console.log(error)
             }
@@ -104,7 +127,14 @@ const Post = ({ user, post }) => {
               <div className="publication__comment-header">
                 <div className="publication__comment-header-info">
                   <div className="publication__comment-header-info-img">
-                    <img src={comment.profilePhotoUrl} alt="profile" />
+                    <img
+                      src={
+                        comment.profilePhotoUrl === ''
+                          ? defaultPhoto
+                          : comment.profilePhotoUrl
+                      }
+                      alt="profile"
+                    />
                   </div>
                   <div className="publication__comment-header-info-text">
                     <p className="publication__comment-header-info-text-name">
@@ -116,11 +146,11 @@ const Post = ({ user, post }) => {
                   </div>
                 </div>
                 <div className="publication__comment-header--update">
-                  {post.userId === userId || isAdmin === true ? (
+                  {comment.userId === userId || isAdmin === true ? (
                     <Popup
                       trigger={
                         <div className="publication__infos-edit">
-                          <AiOutlineEdit className="publication__infos-edit-icon" />
+                          <TiDelete className="publication__infos-edit-icon" />
                         </div>
                       }
                       position="left"
@@ -149,7 +179,12 @@ const Post = ({ user, post }) => {
             </div>
           )
         })}
-        <Comment post={post} user={user} />
+        <Comment
+          post={post}
+          user={user}
+          postReload={postReload}
+          setPostReload={setPostReload}
+        />
       </div>
     </div>
   )

@@ -20,6 +20,8 @@ const EditPost = () => {
 
   const formData = new FormData()
   const date = new Date()
+  const minutes =
+    date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()
   const realDate =
     'Modifié le' +
     ' ' +
@@ -29,7 +31,7 @@ const EditPost = () => {
     ' ' +
     date.getHours() +
     ':' +
-    date.getMinutes()
+    minutes
 
   const handleChange = (e) => {
     const { name, value } = e.target

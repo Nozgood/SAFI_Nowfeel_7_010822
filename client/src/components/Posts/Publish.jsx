@@ -1,16 +1,19 @@
 import React, { useState } from 'react'
-import newPost from '../../services/post/newPost'
 
-const Publish = ({ data }) => {
-  const userId = localStorage.getItem('userId')
-
+const Publish = ({ data, userId, reload, setReload }) => {
   const userSurname = data.userSurname
   const userName = data.userName
   const profilePhotoUrl = data.profilePhotoUrl
 
+  const form = document.getElementById('form')
+  const imgDisplay = document.getElementById('imgDisplay')
+
   const formData = new FormData()
 
   const date = new Date()
+  const minutes =
+    date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()
+
   const realDate =
     'le' +
     ' ' +
@@ -20,7 +23,7 @@ const Publish = ({ data }) => {
     ' ' +
     date.getHours() +
     ':' +
-    date.getMinutes()
+    minutes
 
   const [postInfos, setPostInfos] = useState({
     profilePhotoUrl: profilePhotoUrl,
@@ -53,9 +56,7 @@ const Publish = ({ data }) => {
       const fileReader = new FileReader()
 
       fileReader.onload = function (event) {
-        document
-          .getElementById('imgDisplay')
-          .setAttribute('src', event.target.result)
+        imgDisplay.setAttribute('src', event.target.result)
         setLoadImg(true)
       }
       fileReader.readAsDataURL(imgChange[0])
@@ -74,7 +75,16 @@ const Publish = ({ data }) => {
     formData.append('photo', postInfos.imgUrl)
 
     try {
-      newPost(formData)
+      fetch('http://localhost:8000/api/post/newPost', {
+        method: 'POST',
+        body: formData,
+      })
+        .then(() => {
+          setReload(reload + 1)
+          setLoadImg(false)
+          form.reset()
+        })
+        .catch((err) => console.log(err))
     } catch (err) {
       console.log(err)
     }
@@ -87,6 +97,7 @@ const Publish = ({ data }) => {
           className="publish__form"
           encType="multipart/form-data"
           onSubmit={handleSubmit}
+          id="form"
         >
           <div className="publish__form-text">
             <img

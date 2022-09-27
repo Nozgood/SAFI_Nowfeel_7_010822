@@ -19,7 +19,7 @@ exports.newPost = (req, res, next) => {
 // GEL ALL POSTS
 exports.allPosts = (req, res, next) => {
     Post.find()
-        .then((posts)=> res.status(200).json({ posts }))
+        .then((posts)=> res.status(200).json({ posts: posts, userId: req.auth.userId }))
         .catch((error)=> res.status(400).json({ error }));
 };
 // GET POST(S) BY USERID

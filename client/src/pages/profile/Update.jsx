@@ -6,7 +6,8 @@ import Header from '../../components/Header/Header'
 import DeleteUser from '../../components/Profile/DeleteUser'
 
 const Update = () => {
-  const userId = localStorage.getItem('userId')
+  const token = localStorage.getItem('token')
+  const [userId, setUserId] = useState()
 
   // INITIATE FORMDATA TO FETCH (MULTER)
   const formData = new FormData()
@@ -21,33 +22,57 @@ const Update = () => {
 
   // GET THE OLD INFOS
   useEffect(() => {
-    const userId = localStorage.getItem('userId')
-    fetch('http://localhost:8000/api/user/' + userId)
+    fetch('http://localhost:8000/api/user/getOne', {
+      method: 'GET',
+      headers: {
+        authorization: 'Bearer ' + token,
+      },
+    })
       .then((res) => {
         return res.json()
       })
       .then((data) => {
         setData({
-          userSurname: data.userSurname,
-          userName: data.userName,
+          userSurname: data.data.userSurname,
+          userName: data.data.userName,
           profilePhotoUrl: '',
           coverPhotoUrl: '',
         })
+        setUserId(data.userId)
       })
-  }, [])
+  }, [token])
 
   // STATE TO DISPLAY COVER / PROFILE PHOTO WHEN CHOOSED
   const [loadCover, setLoadCover] = useState(false)
   const [loadProfile, setLoadProfile] = useState(false)
+  const [regex, setRegex] = useState({
+    userSurname: '',
+    userName: '',
+  })
+
+  // REGEX MANAGEMENT
+  const regName = /^[a-zA-Zéèêëàâæáäîïôœöùûü]+$/
+
+  const handleRegex = (regexName, value, name) => {
+    const testReg = regexName.test(value)
+
+    setRegex({
+      ...regex,
+      [name]: testReg,
+    })
+    setData({
+      ...data,
+      [name]: value,
+    })
+  }
 
   // UPDATE NAME / USERNAME INFOS
   const handleChange = (e) => {
     const { name, value } = e.target
 
-    setData({
-      ...data,
-      [name]: value,
-    })
+    if (name === 'userSurname' || 'userName') {
+      handleRegex(regName, value, name)
+    }
   }
 
   // DISPLAY THE NEW COVER PHOTO AND UPDATE STATE
@@ -95,25 +120,30 @@ const Update = () => {
   // SEND TO THE DB
   const handleSubmit = (event) => {
     event.preventDefault()
-    formData.append('userSurname', data.userSurname)
-    formData.append('userName', data.userName)
-    formData.append('photos', data.coverPhotoUrl)
-    formData.append('photos', data.profilePhotoUrl)
 
-    if (data.coverPhotoUrl !== '' && data.profilePhotoUrl !== '') {
-      formData.append('whichPhotos', 'all')
-    } else if (data.coverPhotoUrl !== '' && data.profilePhotoUrl === '') {
-      formData.append('whichPhotos', 'cover')
-    } else if (data.coverPhotoUrl === '' && data.profilePhotoUrl !== '') {
-      formData.append('whichPhotos', 'profile')
-    } else if (data.coverPhotoUrl === '' && data.profilePhotoUrl === '') {
-      formData.append('whichPhotos', 'none')
-    }
+    if (regex.userSurname === false || regex.userName === false) {
+      alert('Les informations saisies ne sont pas correctes')
+    } else {
+      formData.append('userSurname', data.userSurname)
+      formData.append('userName', data.userName)
+      formData.append('photos', data.coverPhotoUrl)
+      formData.append('photos', data.profilePhotoUrl)
 
-    try {
-      updateUser(formData)
-    } catch (err) {
-      console.log(err)
+      if (data.coverPhotoUrl !== '' && data.profilePhotoUrl !== '') {
+        formData.append('whichPhotos', 'all')
+      } else if (data.coverPhotoUrl !== '' && data.profilePhotoUrl === '') {
+        formData.append('whichPhotos', 'cover')
+      } else if (data.coverPhotoUrl === '' && data.profilePhotoUrl !== '') {
+        formData.append('whichPhotos', 'profile')
+      } else if (data.coverPhotoUrl === '' && data.profilePhotoUrl === '') {
+        formData.append('whichPhotos', 'none')
+      }
+
+      try {
+        updateUser(formData)
+      } catch (err) {
+        console.log(err)
+      }
     }
   }
 
@@ -179,14 +209,14 @@ const Update = () => {
           <input
             type="text"
             name="userSurname"
-            placeholder="Prénom..."
+            placeholder={data.userSurname}
             className="update__form-surname"
             onChange={handleChange}
           />
           <input
             type="text"
             name="userName"
-            placeholder="Nom..."
+            placeholder={data.userName}
             className="update__form-name"
             onChange={handleChange}
           />

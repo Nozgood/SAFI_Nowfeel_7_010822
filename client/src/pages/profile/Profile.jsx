@@ -7,32 +7,39 @@ import user from '../../assets/user.png'
 import { Link } from 'react-router-dom'
 
 const Profile = () => {
-  const userId = window.location.href.split('/profile/')[1]
-  const localId = localStorage.getItem('userId')
-
+  const [localId, setLocalId] = useState()
+  const [reload, setReload] = useState(0)
   const [data, setData] = useState({
     userSurname: '',
     userName: '',
     profilePhotoUrl: '',
     coverPhotoUrl: '',
   })
+  const userId = window.location.href.split('/profile/')[1]
+  const token = localStorage.getItem('token')
 
   useEffect(() => {
     const userId = window.location.href.split('/profile/')[1]
-    fetch('http://localhost:8000/api/user/' + userId)
+    fetch('http://localhost:8000/api/user/' + userId, {
+      method: 'GET',
+      headers: {
+        authorization: 'Bearer ' + token,
+      },
+    })
       .then((res) => {
         return res.json()
       })
       .then((data) => {
-        setData(data)
+        setData(data.data)
+        setLocalId(data.userId)
       })
-  }, [])
+  }, [token])
 
   const identity = data.userSurname + ' ' + data.userName
 
   return (
     <>
-      <Header />
+      <Header userId={localId} />
       <main className="profile">
         <section className="profile__section">
           <div className="profile__cover">
@@ -61,8 +68,19 @@ const Profile = () => {
           </div>
         </section>
         <section className="profile__section profile__publications">
-          {localId === userId ? <Publish data={data} /> : null}
-          <UserPublication user={data} />
+          {localId === userId ? (
+            <Publish
+              data={data}
+              userId={userId}
+              reload={reload}
+              setReload={setReload}
+            />
+          ) : null}
+          <UserPublication
+            user={data}
+            userId={localId}
+            profileReload={reload}
+          />
         </section>
       </main>
     </>

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import logo from '../../assets/icon-left-font-monochrome-white.svg'
 import { AiOutlineSearch } from 'react-icons/ai'
 
-const Nav = () => {
+const Nav = ({ userId }) => {
   const [burger, setBurger] = useState(false)
 
   const handleBurger = () => {
@@ -12,14 +12,14 @@ const Nav = () => {
 
   const logout = () => {
     localStorage.clear()
-    window.location.href('http://localhost:3000')
+    window.location.href = 'http://localhost:3000'
   }
-
-  const userId = localStorage.getItem('userId')
 
   return (
     <nav className={burger === true ? 'nav open' : 'nav'}>
-      <img src={logo} alt="logo" className="nav__logo" />
+      <Link to="/" className="nav__logo">
+        <img src={logo} alt="logo" />
+      </Link>
       <ul className={burger === true ? 'nav__list open' : 'nav__list'}>
         <li className="nav__item">
           <Link to="/" className="nav__link">
@@ -27,7 +27,7 @@ const Nav = () => {
           </Link>
         </li>
         <li className="nav__item">
-          <Link to={`/profile/${userId}`} className="nav__link">
+          <Link to={`/profile/${userId.userId}`} className="nav__link">
             Profil
           </Link>
         </li>

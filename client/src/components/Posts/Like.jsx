@@ -2,8 +2,7 @@ import React, { useState } from 'react'
 import sendLike from '../../services/post/like'
 import { BsHeartFill, BsHeart } from 'react-icons/bs'
 
-const Like = ({ postInfos }) => {
-  const userId = localStorage.getItem('userId')
+const Like = ({ postInfos, userId }) => {
   let likes = parseInt(postInfos.likes)
 
   // STATE TO SET LIKE AND KNOW WHAT TO SEND TO DB
@@ -41,7 +40,7 @@ const Like = ({ postInfos }) => {
 
       const likeInfos = {
         _id: postInfos._id,
-        userId: localStorage.getItem('userId'),
+        userId: userId,
         like: 1,
       }
 

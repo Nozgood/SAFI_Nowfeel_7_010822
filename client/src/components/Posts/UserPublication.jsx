@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import Post from './Post'
 
-const UserPublication = ({ user }) => {
+const UserPublication = ({ user, userId, profileReload }) => {
   const [posts, setPosts] = useState()
   const [loadData, setLoadData] = useState(false)
+  const [reload, setReload] = useState(0)
 
   useEffect(() => {
     const userId = window.location.href.split('/profile/')[1]
@@ -15,14 +16,23 @@ const UserPublication = ({ user }) => {
         setPosts(data.posts)
         setLoadData(true)
       })
-  }, [])
+  }, [profileReload, reload])
 
   return (
     <>
       <section className="all">
         {loadData === true ? (
           posts.map((post) => {
-            return <Post post={post} user={user} key={post._id} />
+            return (
+              <Post
+                post={post}
+                user={user}
+                key={post._id}
+                userId={userId}
+                reload={reload}
+                setReload={setReload}
+              />
+            )
           })
         ) : (
           <div>Loading ... </div>

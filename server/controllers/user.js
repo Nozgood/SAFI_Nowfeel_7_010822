@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const fs = require('fs');
 const Post = require('../models/Post')
+const Comment = require('../models/Comment');
 
 // SIGNUP FUNCTION
 exports.signup = (req, res, next )=> {
@@ -58,9 +59,9 @@ exports.login = (req, res, next) => {
 
 exports.oneUser = ((req, res, next) => {
     User.findOne({
-        _id: req.params.id
+        _id: req.auth.userId
     })
-        .then((data)=> res.status(200).json(data))
+        .then((data)=> res.status(200).json({data: data, userId: req.auth.userId}))
         .catch((error) => res.status(400).json({ error }))
 });
 
@@ -120,7 +121,7 @@ exports.updateUser = ((req, res, next) => {
 // GET ALL USERS (for searchbar)
 exports.getUsers = (req, res, next) => {
     User.find()
-        .then(users => res.status(200).json(users))
+        .then(users => res.status(200).json({users: users, userId: req.auth.userId}))
         .catch(error => res.status(400).json({ error }));
 };
 
@@ -136,9 +137,15 @@ exports.deleteUser = (req, res, next) => {
                         if(!valid) {
                             res.status(401).json({message: 'email / mot de passe incorrect' })
                         } else {
-                            Post.deleteMany({ userId: req.params.id })
+                            Post.updateMany({ userId: req.params.id }, {
+                                profilePhotoUrl: '',
+                            })
                                 .then(() => {
-                                    User.findOne({ _id: req.params.id}) 
+                                    Comment.updateMany({ userId: req.params.id }, {
+                                        profilePhotoUrl: '',
+                                    })
+                                    .then(()=> {
+                                        User.findOne({ _id: req.params.id, email: req.body.email }) 
                                         .then((user) => {
                                             const profilePhotoName = user.profilePhotoUrl.split('/images/')[1];
                                             const coverPhotoName = user.coverPhotoUrl.split('/images/')[1];
@@ -152,6 +159,8 @@ exports.deleteUser = (req, res, next) => {
                                          })
                                         .catch((error) => res.status(400).json({ error }))
                                 })
+                                    })
+                                    .catch((error)=> res.status(500).json({ error }))
                                 .catch((error) => res.status(500).json({ error }))
                         }
                     })
@@ -160,3 +169,11 @@ exports.deleteUser = (req, res, next) => {
         })
         .catch((error)=> res.status(400).json({error }))
 };
+
+exports.userById = ((req, res, next) => {
+    User.findOne({
+        _id: req.params.id
+    })
+        .then((data)=> res.status(200).json({data: data, userId: req.auth.userId}))
+        .catch((error) => res.status(400).json({ error }))
+});

@@ -1,10 +1,11 @@
 const express = require('express');
-const router = express.Router();
+const auth = require('../middleware/auth');
 const postCtrl = require('../controllers/post');
 const multer = require('../middleware/multer-config');
+const router = express.Router();
 
 router.post('/newPost',multer.single('photo'), postCtrl.newPost);
-router.get('/allposts',postCtrl.allPosts);
+router.get('/allposts', auth, postCtrl.allPosts);
 
 // here we use USER ID
 router.get('/allposts/:userId', postCtrl.postsByUserId);

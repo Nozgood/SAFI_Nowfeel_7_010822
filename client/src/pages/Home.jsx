@@ -12,29 +12,42 @@ const Home = () => {
   })
 
   const [loaded, setLoaded] = useState(false)
+  const [userId, setUserId] = useState()
+  const [reload, setReload] = useState(0)
 
   useEffect(() => {
-    const userId = localStorage.getItem('userId')
-    fetch('http://localhost:8000/api/user/' + userId)
+    const token = localStorage.getItem('token')
+    fetch('http://localhost:8000/api/user/getOne', {
+      method: 'GET',
+      headers: {
+        authorization: 'Bearer ' + token,
+      },
+    })
       .then((res) => {
         return res.json()
       })
       .then((data) => {
-        setData(data)
+        setData(data.data)
         setLoaded(true)
+        setUserId(data.userId)
       })
   }, [])
 
   return (
     <>
-      <Header />
+      <Header userId={userId} />
       {loaded ? (
         <main className="home">
-          <Publish data={data} />
-          <Publication data={data} />
+          <Publish
+            data={data}
+            userId={userId}
+            reload={reload}
+            setReload={setReload}
+          />
+          <Publication data={data} homeReload={reload} setReload={setReload} />
         </main>
       ) : (
-        <div>Loading...</div>
+        <div className="home__loading">Loading...</div>
       )}
     </>
   )
