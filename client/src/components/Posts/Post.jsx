@@ -5,6 +5,7 @@ import Popup from 'reactjs-popup'
 import { AiOutlineEdit } from 'react-icons/ai'
 import { Link } from 'react-router-dom'
 import deleteComment from '../../services/post/deleteComment'
+import defaultPhoto from '../../assets/user.png'
 
 const Post = ({ user, post, userId, setReload, reload }) => {
   const [comments, setComments] = useState([])
@@ -44,7 +45,14 @@ const Post = ({ user, post, userId, setReload, reload }) => {
       <div className="publication__infos">
         <div className="publication__infos-static">
           <div className="publication__infos-img">
-            <img src={post.profilePhotoUrl} alt="profile" />
+            <img
+              src={
+                post.profilePhotoUrl === ''
+                  ? defaultPhoto
+                  : post.profilePhotoUrl
+              }
+              alt="profile"
+            />
           </div>
           <div className="publication__infos-text">
             <h2>{post.userSurname + ' ' + post.userName}</h2>
