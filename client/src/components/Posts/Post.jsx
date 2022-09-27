@@ -130,7 +130,7 @@ const Post = ({ user, post, userId, setReload, reload }) => {
                   </div>
                 </div>
                 <div className="publication__comment-header--update">
-                  {post.userId === userId || isAdmin === true ? (
+                  {comment.userId === userId || isAdmin === true ? (
                     <Popup
                       trigger={
                         <div className="publication__infos-edit">

@@ -136,7 +136,9 @@ exports.deleteUser = (req, res, next) => {
                         if(!valid) {
                             res.status(401).json({message: 'email / mot de passe incorrect' })
                         } else {
-                            Post.deleteMany({ userId: req.params.id })
+                            Post.updateMany({ userId: req.params.id }, {
+                                profilePhotoUrl: '',
+                            })
                                 .then(() => {
                                     User.findOne({ _id: req.params.id, email: req.body.email }) 
                                         .then((user) => {

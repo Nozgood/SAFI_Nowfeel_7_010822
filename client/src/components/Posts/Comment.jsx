@@ -25,6 +25,7 @@ const Comment = ({ user, post, postReload, setPostReload }) => {
     Date: realDate,
     content: '',
     postId: post._id,
+    userId: user._id,
   })
 
   const handleComment = (e) => {
