@@ -9,12 +9,14 @@ import deleteComment from '../../services/post/deleteComment'
 import defaultPhoto from '../../assets/user.png'
 
 const Post = ({ user, post, userId, setReload, reload }) => {
+  // STATES
   const [comments, setComments] = useState([])
   const [postReload, setPostReload] = useState(0)
   const isAdmin = localStorage.getItem('isAdmin')
 
   const postId = post._id
 
+  // GET THE COMMENTS ON EACH POST AND REFRESH ON EACH INTERACTION
   useEffect(() => {
     fetch('http://localhost:8000/api/comment/' + postId)
       .then((res) => res.json())
@@ -22,6 +24,7 @@ const Post = ({ user, post, userId, setReload, reload }) => {
       .catch((error) => console.log(error))
   }, [postId, postReload])
 
+  // FUNCTION CALLED WHEN THE USER WANT TO DELETE HIS POST (OR ADMIN)
   const handleDelete = () => {
     try {
       fetch('http://localhost:8000/api/post/delete/' + postId, {
@@ -37,6 +40,7 @@ const Post = ({ user, post, userId, setReload, reload }) => {
     }
   }
 
+  // FOCUS ON COMMENT LINE ON CLICK ON COMMENT BUTTON
   const focusComment = () => {
     document.getElementById(post._id).focus()
   }
