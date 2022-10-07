@@ -43,13 +43,7 @@
       }
 
       &-popup {
-        display: flex;
-        flex-direction: column;
-        background: white;
-        padding: 1rem;
         align-items: flex-start;
-        gap: 1rem;
-        border-radius: 5px;
         transition: $transition;
 
         &-update {

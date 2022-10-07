@@ -50,6 +50,18 @@ main {
     padding-top: 90px;
   }
 }
+.foo-content {
+  background: white;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border-radius: 8px;
+}
+.foo-content div {
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+
 .welcome {
   display: flex;
   flex-direction: column;
@@ -918,13 +930,7 @@ main.edit {
   border-color: #fd2d01;
 }
 .publication__infos-edit-popup {
-  display: flex;
-  flex-direction: column;
-  background: white;
-  padding: 1rem;
   align-items: flex-start;
-  gap: 1rem;
-  border-radius: 5px;
   transition: all 400ms ease;
 }
 .publication__infos-edit-popup-update {
@@ -1135,6 +1141,12 @@ main.edit {
 .comment__form-submit-icon {
   position: absolute;
   z-index: 0;
+}
+
+.test {
+  display: flex;
+  flex-direction: column;
+  background: red;
 }
 
 /*# sourceMappingURL=style.css.map */

@@ -74,12 +74,13 @@ const Post = ({ user, post, userId, setReload, reload }) => {
               </div>
             }
             position="left"
-            on="hover"
-            mouseLeaveDelay={300000}
+            on="click"
+            mouseLeaveDelay={30000}
             mouseEnterDelay={0}
             contentStyle={{ padding: '0px', border: 'none' }}
             arrow={false}
             closeOnDocumentClick={false}
+            className="foo"
           >
             <Popup
               trigger={
@@ -99,8 +100,9 @@ const Post = ({ user, post, userId, setReload, reload }) => {
               arrow={false}
               closeOnDocumentClick={false}
               lockScroll={true}
-              mouseLeaveDelay={100000}
+              mouseLeaveDelay={10000}
               modal={true}
+              closeOnEscape={true}
             >
               <EditPost postId={post._id} />
             </Popup>

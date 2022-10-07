@@ -21,3 +21,9 @@
 @import './components//publication';
 @import './components//test';
 @import './components/comment';
+
+.test {
+  display: flex;
+  flex-direction: column;
+  background: red;
+}

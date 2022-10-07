@@ -1,4 +1,5 @@
 const editPost = (postInfos, postId) => {
+  console.log(postInfos)
   fetch('http://localhost:8000/api/post/updatePost/' + postId, {
     method: 'put',
     body: postInfos,

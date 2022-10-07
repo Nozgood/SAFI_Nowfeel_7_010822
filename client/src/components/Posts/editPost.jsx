@@ -12,6 +12,7 @@ const EditPost = ({ postId }) => {
         return res.json()
       })
       .then((data) => {
+        console.log(data)
         setPostInfos(data.post[0])
       })
       .catch((error) => console.log(error))
@@ -61,7 +62,6 @@ const EditPost = ({ postId }) => {
   }
 
   const handleSubmit = (event) => {
-    console.log('hello')
     event.preventDefault()
     postInfos.modificationDate = realDate
     formData.append('modificationDate', realDate)
