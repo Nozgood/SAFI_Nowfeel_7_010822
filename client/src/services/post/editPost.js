@@ -1,11 +1,12 @@
-const editPost = (postInfos) => {
-  const id = window.location.href.split(':3000/')[1]
-  fetch('http://localhost:8000/api/post/updatePost/' + id, {
+const editPost = (postInfos, postId) => {
+  fetch('http://localhost:8000/api/post/updatePost/' + postId, {
     method: 'put',
     body: postInfos,
   })
-    .then(() => (window.location.href = 'http://localhost:3000'))
+    .then(() => console.log('hello'))
     .catch((error) => console.log(error))
 }
 
 export default editPost
+
+// window.location.href = 'http://localhost:3000'

@@ -12,6 +12,7 @@ import Test from './pages/Test'
 import EditPost from './components/Posts/editPost'
 import './style.css'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import HomeEdit from './pages/HomeEdit'
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 const token = localStorage.getItem('token')

@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import editPost from '../../services/post/editPost'
-import Header from '../Header/Header'
 
-const EditPost = () => {
+const EditPost = ({ postId }) => {
   const [postInfos, setPostInfos] = useState({})
 
   useEffect(() => {
-    const postId = window.location.href.split(':3000/')[1]
+    // const postId = window.location.href.split(':3000/')[1]
 
     fetch('http://localhost:8000/api/post/' + postId)
       .then((res) => {
@@ -16,7 +15,7 @@ const EditPost = () => {
         setPostInfos(data.post[0])
       })
       .catch((error) => console.log(error))
-  }, [])
+  }, [postId])
 
   const formData = new FormData()
   const date = new Date()
@@ -62,6 +61,7 @@ const EditPost = () => {
   }
 
   const handleSubmit = (event) => {
+    console.log('hello')
     event.preventDefault()
     postInfos.modificationDate = realDate
     formData.append('modificationDate', realDate)
@@ -69,14 +69,13 @@ const EditPost = () => {
     formData.append('photo', postInfos.imgUrl)
 
     try {
-      editPost(formData)
+      editPost(formData, postId)
     } catch (err) {
       console.log(err)
     }
   }
   return (
     <>
-      <Header />
       <main className="edit">
         <section className="publish edit">
           <form

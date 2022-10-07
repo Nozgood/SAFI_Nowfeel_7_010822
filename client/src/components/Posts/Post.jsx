@@ -5,8 +5,9 @@ import Popup from 'reactjs-popup'
 import { AiOutlineEdit } from 'react-icons/ai'
 import { TiDelete } from 'react-icons/ti'
 import { Link } from 'react-router-dom'
-import deleteComment from '../../services/post/deleteComment'
 import defaultPhoto from '../../assets/user.png'
+import Publish from './Publish'
+import EditPost from './editPost'
 
 const Post = ({ user, post, userId, setReload, reload }) => {
   // STATES
@@ -74,19 +75,36 @@ const Post = ({ user, post, userId, setReload, reload }) => {
             }
             position="left"
             on="hover"
-            closeOnDocumentClick
-            mouseLeaveDelay={300}
+            mouseLeaveDelay={300000}
             mouseEnterDelay={0}
             contentStyle={{ padding: '0px', border: 'none' }}
             arrow={false}
+            closeOnDocumentClick={false}
           >
+            <Popup
+              trigger={
+                <div className="publication__infos-edit-popup-update">
+                  Modifier
+                </div>
+              }
+              position="left"
+              on="click"
+              contentStyle={{
+                padding: '0px',
+                border: 'none',
+              }}
+              overlayStyle={{
+                background: 'rgba(0,0,0, 0.7)',
+              }}
+              arrow={false}
+              closeOnDocumentClick={false}
+              lockScroll={true}
+              mouseLeaveDelay={100000}
+              modal={true}
+            >
+              <EditPost postId={post._id} />
+            </Popup>
             <div className="publication__infos-edit-popup">
-              <Link
-                to={`/${post._id}`}
-                className="publication__infos-edit-popup-update"
-              >
-                Modifier
-              </Link>
               <button
                 className="publication__infos-edit-popup-delete"
                 onClick={handleDelete}
