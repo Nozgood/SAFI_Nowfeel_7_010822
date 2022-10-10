@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import publishEdit from '../../services/post/publishEdit'
 
-const PublishEdit = ({ editPost, data }) => {
+const PublishEdit = ({ editPost, data, userId }) => {
   // DATE MANAGEMENT
   const date = new Date()
   const minutes =
@@ -83,8 +83,6 @@ const PublishEdit = ({ editPost, data }) => {
     event.preventDefault()
 
     editPostInfos.modificationDate = realDate
-    console.log(editPostInfos.modificationDate)
-    console.log(editPostInfos)
 
     formData.append('modificationDate', editPostInfos.modificationDate)
     formData.append('content', editPostInfos.content)
@@ -97,6 +95,10 @@ const PublishEdit = ({ editPost, data }) => {
     } catch (err) {
       console.log(err)
     }
+  }
+
+  const handleCancel = () => {
+    window.location.href = 'http://localhost:3000/profile/' + userId
   }
 
   return (
@@ -157,6 +159,9 @@ const PublishEdit = ({ editPost, data }) => {
             <img alt="ok" id="imgDisplay" />
           </div>
         </form>
+        <button className="publish__edit-cancel" onClick={handleCancel}>
+          Annuler les modifications
+        </button>
       </section>
     </>
   )
