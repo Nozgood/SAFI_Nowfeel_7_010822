@@ -4,8 +4,7 @@ import Comment from './Comment'
 import Popup from 'reactjs-popup'
 import { AiOutlineEdit } from 'react-icons/ai'
 import { TiDelete } from 'react-icons/ti'
-import { Link } from 'react-router-dom'
-import deleteComment from '../../services/post/deleteComment'
+
 import defaultPhoto from '../../assets/user.png'
 
 const Post = ({ user, post, userId, setReload, reload, setEditPost }) => {
@@ -50,6 +49,10 @@ const Post = ({ user, post, userId, setReload, reload, setEditPost }) => {
     setEditPost({
       toEdit: true,
       postId: post._id,
+    })
+    window.scrollTo({
+      top: 0,
+      left: 0,
     })
   }
 

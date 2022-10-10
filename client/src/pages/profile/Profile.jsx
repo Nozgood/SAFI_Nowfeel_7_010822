@@ -5,7 +5,7 @@ import Publish from '../../components/Posts/Publish'
 import logo from '../../assets/icon-left-font.svg'
 import user from '../../assets/user.png'
 import { Link } from 'react-router-dom'
-
+import PublishEdit from '../../components/Posts/PublishEdit'
 const Profile = () => {
   const [localId, setLocalId] = useState()
   const [reload, setReload] = useState(0)
@@ -36,6 +36,12 @@ const Profile = () => {
   }, [token])
 
   const identity = data.userSurname + ' ' + data.userName
+
+  // EDIT POST MANAGEMENT
+  const [profileEditPost, setProfileEditPost] = useState({
+    toEdit: false,
+    postId: '',
+  })
 
   return (
     <>
@@ -69,17 +75,26 @@ const Profile = () => {
         </section>
         <section className="profile__section profile__publications">
           {localId === userId ? (
-            <Publish
-              data={data}
-              userId={userId}
-              reload={reload}
-              setReload={setReload}
-            />
+            profileEditPost.toEdit === false ? (
+              <Publish
+                data={data}
+                userId={userId}
+                reload={reload}
+                setReload={setReload}
+              />
+            ) : (
+              <PublishEdit
+                data={data}
+                editPost={profileEditPost}
+                userId={userId}
+              />
+            )
           ) : null}
           <UserPublication
             user={data}
             userId={localId}
             profileReload={reload}
+            setProfileEditPost={setProfileEditPost}
           />
         </section>
       </main>

@@ -871,6 +871,20 @@ main {
   background: #4e5166;
   border-radius: 5px;
 }
+.publish__edit-cancel {
+  margin-top: 1rem;
+  padding: 1rem;
+  border-radius: 7px;
+  width: 100%;
+  background: white;
+  transition: all 400ms ease;
+  border: 1px solid transparent;
+}
+.publish__edit-cancel:hover {
+  background: #fd2d01;
+  color: white;
+  border-color: black;
+}
 
 main.edit {
   height: 100%;

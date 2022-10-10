@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import Post from './Post'
 
-const UserPublication = ({ user, userId, profileReload }) => {
+const UserPublication = ({
+  user,
+  userId,
+  profileReload,
+  setProfileEditPost,
+}) => {
   const [posts, setPosts] = useState()
   const [loadData, setLoadData] = useState(false)
   const [reload, setReload] = useState(0)
@@ -31,6 +36,7 @@ const UserPublication = ({ user, userId, profileReload }) => {
                 userId={userId}
                 reload={reload}
                 setReload={setReload}
+                setEditPost={setProfileEditPost}
               />
             )
           })
