@@ -83,8 +83,6 @@ const PublishEdit = ({ editPost, data, userId }) => {
     event.preventDefault()
 
     editPostInfos.modificationDate = realDate
-    console.log(editPostInfos.modificationDate)
-    console.log(editPostInfos)
 
     formData.append('modificationDate', editPostInfos.modificationDate)
     formData.append('content', editPostInfos.content)
