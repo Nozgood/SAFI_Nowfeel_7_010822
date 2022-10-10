@@ -39,8 +39,6 @@ const Home = () => {
     postId: '',
   })
 
-  console.log(editPost)
-
   return (
     <>
       <Header userId={userId} />
