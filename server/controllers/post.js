@@ -42,6 +42,7 @@ exports.postById = (req,res, next) => {
 
 // UPDATE A POST
 exports.updatePost = (req, res, next) => {
+    console.log(req.body)
     const editPost = req.file ? {
         ...req.body, 
         imgUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
