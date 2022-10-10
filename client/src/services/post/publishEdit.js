@@ -1,5 +1,4 @@
-const editPost = (postInfos) => {
-  const id = window.location.href.split(':3000/')[1]
+const publishEdit = (postInfos, id) => {
   fetch('http://localhost:8000/api/post/updatePost/' + id, {
     method: 'put',
     body: postInfos,
@@ -8,4 +7,4 @@ const editPost = (postInfos) => {
     .catch((error) => console.log(error))
 }
 
-export default editPost
+export default publishEdit

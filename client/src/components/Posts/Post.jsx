@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom'
 import deleteComment from '../../services/post/deleteComment'
 import defaultPhoto from '../../assets/user.png'
 
-const Post = ({ user, post, userId, setReload, reload }) => {
+const Post = ({ user, post, userId, setReload, reload, setEditPost }) => {
   // STATES
   const [comments, setComments] = useState([])
   const [postReload, setPostReload] = useState(0)
@@ -43,6 +43,14 @@ const Post = ({ user, post, userId, setReload, reload }) => {
   // FOCUS ON COMMENT LINE ON CLICK ON COMMENT BUTTON
   const focusComment = () => {
     document.getElementById(post._id).focus()
+  }
+
+  // FUNCTION TO ENABLE EDIT ON PUBLISH COMPONENT DIRECTLY
+  const handleEdit = () => {
+    setEditPost({
+      toEdit: true,
+      postId: post._id,
+    })
   }
 
   return (
@@ -81,12 +89,12 @@ const Post = ({ user, post, userId, setReload, reload }) => {
             arrow={false}
           >
             <div className="publication__infos-edit-popup">
-              <Link
-                to={`/${post._id}`}
+              <button
+                onClick={handleEdit}
                 className="publication__infos-edit-popup-update"
               >
                 Modifier
-              </Link>
+              </button>
               <button
                 className="publication__infos-edit-popup-delete"
                 onClick={handleDelete}

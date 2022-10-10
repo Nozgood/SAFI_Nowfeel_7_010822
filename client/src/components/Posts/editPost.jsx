@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import editPost from '../../services/post/editPost'
+import publishEdit from '../../services/post/publishEdit'
 import Header from '../Header/Header'
 
 const EditPost = () => {
@@ -19,6 +19,7 @@ const EditPost = () => {
   }, [])
 
   const formData = new FormData()
+
   const date = new Date()
   const minutes =
     date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()
@@ -69,11 +70,12 @@ const EditPost = () => {
     formData.append('photo', postInfos.imgUrl)
 
     try {
-      editPost(formData)
+      publishEdit(formData)
     } catch (err) {
       console.log(err)
     }
   }
+
   return (
     <>
       <Header />
