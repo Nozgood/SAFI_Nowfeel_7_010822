@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Header from '../components/Header/Header'
 import Publish from '../components/Posts/Publish'
 import Publication from '../components/Posts/Publication'
+import PublishEdit from '../components/Posts/PublishEdit'
 
 const Home = () => {
   const [data, setData] = useState({
@@ -33,18 +34,34 @@ const Home = () => {
       })
   }, [])
 
+  const [editPost, setEditPost] = useState({
+    toEdit: false,
+    postId: '',
+  })
+
+  console.log(editPost)
+
   return (
     <>
       <Header userId={userId} />
       {loaded ? (
         <main className="home">
-          <Publish
+          {editPost.toEdit ? (
+            <PublishEdit editPost={editPost} data={data} userId={userId} />
+          ) : (
+            <Publish
+              data={data}
+              userId={userId}
+              reload={reload}
+              setReload={setReload}
+            />
+          )}
+          <Publication
             data={data}
-            userId={userId}
-            reload={reload}
+            homeReload={reload}
             setReload={setReload}
+            setEditPost={setEditPost}
           />
-          <Publication data={data} homeReload={reload} setReload={setReload} />
         </main>
       ) : (
         <div className="home__loading">Loading...</div>

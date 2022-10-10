@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Post from './Post'
 
-const Publication = ({ data, homeReload }) => {
+const Publication = ({ data, homeReload, setEditPost }) => {
   const [posts, setPosts] = useState()
   const [loadData, setLoadData] = useState(false)
   const [userId, setUserId] = useState()
@@ -39,6 +39,7 @@ const Publication = ({ data, homeReload }) => {
                   key={post._id}
                   setReload={setReload}
                   reload={reload}
+                  setEditPost={setEditPost}
                 />
               )
             })

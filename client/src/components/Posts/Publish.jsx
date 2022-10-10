@@ -25,6 +25,7 @@ const Publish = ({ data, userId, reload, setReload }) => {
     ':' +
     minutes
 
+  // STATES
   const [postInfos, setPostInfos] = useState({
     profilePhotoUrl: profilePhotoUrl,
     userId: userId,
@@ -71,6 +72,7 @@ const Publish = ({ data, userId, reload, setReload }) => {
     formData.append('userName', userName)
     formData.append('userId', userId)
     formData.append('Date', realDate)
+    formData.append('modificationDate', '')
     formData.append('content', postInfos.content)
     formData.append('photo', postInfos.imgUrl)
 
