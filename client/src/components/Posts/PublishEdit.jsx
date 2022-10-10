@@ -88,8 +88,6 @@ const PublishEdit = ({ editPost, data, userId }) => {
     formData.append('content', editPostInfos.content)
     formData.append('photo', editPostInfos.imgUrl)
 
-    console.log(formData)
-
     try {
       publishEdit(formData, editPost.postId)
     } catch (err) {
