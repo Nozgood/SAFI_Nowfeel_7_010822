@@ -4,7 +4,7 @@
 ## Importation du projet sur votre environnement : 
 
 - Ouvrir un dossier (vide de préférence), ouvrir un terminal et lancer la commande suivante :
-- `git clone https://github.com/Nozgood/groupo-v2.git`
+- `git clone https://github.com/Nozgood/SAFI_Nowfeel_7_010822.git`
 - Rendez-vous dans le dossier client, puis lancer la commande `npm install`
 - Rendez-vous dans le dossier server, puis lancer la commande `npm install`
 - Copier / coller le fichier .env.example (au même endroit) en remplaçant le nom du fichier par '.env' 

@@ -7,6 +7,7 @@ const Comment = ({ user, post, postReload, setPostReload }) => {
     date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()
 
   const input = document.getElementById(`${post._id}`)
+
   const realDate =
     'le' +
     ' ' +
@@ -37,6 +38,14 @@ const Comment = ({ user, post, postReload, setPostReload }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault()
+
+    setComment({
+      ...comment,
+      profilePhotoUrl: user.profilePhotoUrl,
+      userSurname: user.userSurname,
+      userName: user.userName,
+      userId: user._id,
+    })
 
     try {
       fetch('http://localhost:8000/api/comment/' + post._id, {

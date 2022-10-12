@@ -7,19 +7,30 @@ import { TiDelete } from 'react-icons/ti'
 
 import defaultPhoto from '../../assets/user.png'
 
-const Post = ({ user, post, userId, setReload, reload, setEditPost }) => {
+const Post = ({
+  user,
+  post,
+  userId,
+  setReload,
+  reload,
+  setEditPost,
+  isAdmin,
+}) => {
   // STATES
   const [comments, setComments] = useState([])
   const [postReload, setPostReload] = useState(0)
-  const isAdmin = localStorage.getItem('isAdmin')
 
   const postId = post._id
+
+  const token = localStorage.getItem('token')
 
   // GET THE COMMENTS ON EACH POST AND REFRESH ON EACH INTERACTION
   useEffect(() => {
     fetch('http://localhost:8000/api/comment/' + postId)
       .then((res) => res.json())
-      .then((data) => setComments(data.comments))
+      .then((data) => {
+        setComments(data.comments)
+      })
       .catch((error) => console.log(error))
   }, [postId, postReload])
 
@@ -28,6 +39,9 @@ const Post = ({ user, post, userId, setReload, reload, setEditPost }) => {
     try {
       fetch('http://localhost:8000/api/post/delete/' + postId, {
         method: 'delete',
+        headers: {
+          authorization: 'Bearer ' + token,
+        },
         body: post,
       })
         .then(() => {

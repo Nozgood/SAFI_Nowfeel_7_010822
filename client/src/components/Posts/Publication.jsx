@@ -5,6 +5,7 @@ const Publication = ({ data, homeReload, setEditPost }) => {
   const [posts, setPosts] = useState()
   const [loadData, setLoadData] = useState(false)
   const [userId, setUserId] = useState()
+  const [isAdmin, setIsAdmin] = useState()
   const [reload, setReload] = useState(0)
 
   useEffect(() => {
@@ -21,6 +22,7 @@ const Publication = ({ data, homeReload, setEditPost }) => {
       .then((data) => {
         setPosts(data.posts)
         setUserId(data.userId)
+        setIsAdmin(data.isAdmin)
         setLoadData(true)
       })
   }, [reload, homeReload])
@@ -40,6 +42,7 @@ const Publication = ({ data, homeReload, setEditPost }) => {
                   setReload={setReload}
                   reload={reload}
                   setEditPost={setEditPost}
+                  isAmdin={isAdmin}
                 />
               )
             })

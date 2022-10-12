@@ -734,6 +734,9 @@ main {
   .nav {
     height: 90px;
   }
+  .nav__logo {
+    max-width: 150px;
+  }
   .nav__link {
     font-size: 1.4rem;
   }
