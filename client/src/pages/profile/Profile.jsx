@@ -9,6 +9,7 @@ import PublishEdit from '../../components/Posts/PublishEdit'
 const Profile = () => {
   const [localId, setLocalId] = useState()
   const [reload, setReload] = useState(0)
+  const [isLoad, setIsLoad] = useState(false)
   const [data, setData] = useState({
     userSurname: '',
     userName: '',
@@ -32,6 +33,7 @@ const Profile = () => {
       .then((data) => {
         setData(data.data)
         setLocalId(data.userId)
+        setIsLoad(true)
       })
   }, [token])
 
@@ -46,58 +48,62 @@ const Profile = () => {
   return (
     <>
       <Header userId={localId} />
-      <main className="profile">
-        <section className="profile__section">
-          <div className="profile__cover">
-            {data.coverPhotoUrl !== '' ? (
-              <img src={data.coverPhotoUrl} alt="couverture" />
-            ) : (
-              <img src={logo} alt="logo" />
-            )}
-          </div>
-          <div className="profile__infos">
-            <div className="profile__infos-content">
-              <div className="profile__infos-content-img">
-                {data.profilePhotoUrl !== '' ? (
-                  <img src={data.profilePhotoUrl} alt="profil" />
-                ) : (
-                  <img src={user} alt="user" />
-                )}
+      {isLoad === true ? (
+        <main className="profile">
+          <section className="profile__section">
+            <div className="profile__cover">
+              {data.coverPhotoUrl !== '' ? (
+                <img src={data.coverPhotoUrl} alt="couverture" />
+              ) : (
+                <img src={logo} alt="logo" />
+              )}
+            </div>
+            <div className="profile__infos">
+              <div className="profile__infos-content">
+                <div className="profile__infos-content-img">
+                  {data.profilePhotoUrl !== '' ? (
+                    <img src={data.profilePhotoUrl} alt="profil" />
+                  ) : (
+                    <img src={user} alt="user" />
+                  )}
+                </div>
+                <div className="profile__infos-content-text">
+                  <h3>{identity}</h3>
+                </div>
               </div>
-              <div className="profile__infos-content-text">
-                <h3>{identity}</h3>
+              <div className="profile__infos-update">
+                <Link to={`/profile/update/${userId}`}>Modifier le profil</Link>
               </div>
             </div>
-            <div className="profile__infos-update">
-              <Link to={`/profile/update/${userId}`}>Modifier le profil</Link>
-            </div>
-          </div>
-        </section>
-        <section className="profile__section profile__publications">
-          {localId === userId ? (
-            profileEditPost.toEdit === false ? (
-              <Publish
-                data={data}
-                userId={userId}
-                reload={reload}
-                setReload={setReload}
-              />
-            ) : (
-              <PublishEdit
-                data={data}
-                editPost={profileEditPost}
-                userId={userId}
-              />
-            )
-          ) : null}
-          <UserPublication
-            user={data}
-            userId={localId}
-            profileReload={reload}
-            setProfileEditPost={setProfileEditPost}
-          />
-        </section>
-      </main>
+          </section>
+          <section className="profile__section profile__publications">
+            {localId === userId ? (
+              profileEditPost.toEdit === false ? (
+                <Publish
+                  data={data}
+                  userId={userId}
+                  reload={reload}
+                  setReload={setReload}
+                />
+              ) : (
+                <PublishEdit
+                  data={data}
+                  editPost={profileEditPost}
+                  userId={userId}
+                />
+              )
+            ) : null}
+            <UserPublication
+              user={data}
+              userId={localId}
+              profileReload={reload}
+              setProfileEditPost={setProfileEditPost}
+            />
+          </section>
+        </main>
+      ) : (
+        <div> Loading...</div>
+      )}
     </>
   )
 }

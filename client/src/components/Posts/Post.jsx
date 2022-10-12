@@ -21,7 +21,6 @@ const Post = ({
   const [postReload, setPostReload] = useState(0)
 
   const postId = post._id
-  console.log(post._id)
 
   const token = localStorage.getItem('token')
 
