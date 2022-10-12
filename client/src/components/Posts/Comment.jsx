@@ -38,6 +38,16 @@ const Comment = ({ user, post, postReload, setPostReload }) => {
   const handleSubmit = (event) => {
     event.preventDefault()
 
+    setComment({
+      ...comment,
+      profilePhotoUrl: user.profilePhotoUrl,
+      userSurname: user.userSurname,
+      userName: user.userName,
+      userId: user._id,
+    })
+
+    console.log(comment)
+
     try {
       fetch('http://localhost:8000/api/comment/' + post._id, {
         method: 'POST',

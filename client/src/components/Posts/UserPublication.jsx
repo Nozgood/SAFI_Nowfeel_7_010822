@@ -13,7 +13,12 @@ const UserPublication = ({
 
   useEffect(() => {
     const userId = window.location.href.split('/profile/')[1]
-    fetch('http://localhost:8000/api/post/allposts/' + userId)
+    const token = localStorage.getItem('token')
+    fetch('http://localhost:8000/api/post/allposts/' + userId, {
+      headers: {
+        authorization: 'Bearer ' + token,
+      },
+    })
       .then((res) => {
         return res.json()
       })

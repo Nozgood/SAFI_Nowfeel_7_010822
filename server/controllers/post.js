@@ -19,7 +19,7 @@ exports.newPost = (req, res, next) => {
 // GEL ALL POSTS
 exports.allPosts = (req, res, next) => {
     Post.find()
-        .then((posts)=> res.status(200).json({ posts: posts, userId: req.auth.userId }))
+        .then((posts)=> res.status(200).json({ posts: posts, userId: req.auth.userId, isAdmin: req.auth.isAdmin }))
         .catch((error)=> res.status(400).json({ error }));
 };
 // GET POST(S) BY USERID
@@ -58,11 +58,13 @@ exports.updatePost = (req, res, next) => {
 };
 // DELETE A POST
 exports.deletePost = (req, res, next) => {
+
     Post.findOne({
         _id: req.params.id
     })
     .then((post)=> {
-        if (post.imgUrl) {
+        if(req.auth.isAdmin === true || req.auth.userId === post.userId) {
+            if (post.imgUrl) {
             const filename = post.imgUrl.split('/images/')[1];
             fs.unlink(`images/${filename}`, ()=> {
             Post.deleteOne({ _id: req.params.id})
@@ -73,6 +75,9 @@ exports.deletePost = (req, res, next) => {
             Post.deleteOne({ _id: req.params.id})
                 .then(()=> res.status(200).json({ message: 'post supprimé' }))
                 .catch((error)=> res.status(500).json({ error }))
+        }
+        } else {
+            res.status(401).json({ message: 'unauthorized'});
         }
     })
     .catch((error)=> res.status(500).json({ error }))

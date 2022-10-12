@@ -33,8 +33,13 @@ const PublishEdit = ({ editPost, data, userId }) => {
   })
 
   useEffect(() => {
+    const token = localStorage.getItem('token')
     if (editPost.toEdit === true) {
-      fetch('http://localhost:8000/api/post/' + editPost.postId)
+      fetch('http://localhost:8000/api/post/' + editPost.postId, {
+        headers: {
+          authorization: 'Bearer ' + token,
+        },
+      })
         .then((res) => {
           return res.json()
         })

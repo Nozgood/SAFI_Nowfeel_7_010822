@@ -639,7 +639,7 @@ main {
   background: rgba(0, 0, 0, 0.6);
 }
 .nav__logo {
-  max-width: 300px;
+  max-width: 30%;
   min-width: 150px;
 }
 .nav__logo img {
@@ -733,6 +733,9 @@ main {
 @media screen and (min-width: 1024px) {
   .nav {
     height: 90px;
+  }
+  .nav__logo {
+    max-width: 150px;
   }
   .nav__link {
     font-size: 1.4rem;
