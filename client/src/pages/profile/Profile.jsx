@@ -6,6 +6,7 @@ import logo from '../../assets/icon-left-font.svg'
 import user from '../../assets/user.png'
 import { Link } from 'react-router-dom'
 import PublishEdit from '../../components/Posts/PublishEdit'
+
 const Profile = () => {
   const [localId, setLocalId] = useState()
   const [reload, setReload] = useState(0)
@@ -71,9 +72,13 @@ const Profile = () => {
                   <h3>{identity}</h3>
                 </div>
               </div>
-              <div className="profile__infos-update">
-                <Link to={`/profile/update/${userId}`}>Modifier le profil</Link>
-              </div>
+              {localId === userId ? (
+                <div className="profile__infos-update">
+                  <Link to={`/profile/update/${userId}`}>
+                    Modifier le profil
+                  </Link>
+                </div>
+              ) : null}
             </div>
           </section>
           <section className="profile__section profile__publications">
