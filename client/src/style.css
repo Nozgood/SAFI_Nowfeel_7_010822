@@ -639,7 +639,7 @@ main {
   background: rgba(0, 0, 0, 0.6);
 }
 .nav__logo {
-  max-width: 30%;
+  max-width: 300px;
   min-width: 150px;
 }
 .nav__logo img {
