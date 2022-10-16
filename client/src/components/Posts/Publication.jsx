@@ -42,7 +42,7 @@ const Publication = ({ data, homeReload, setEditPost }) => {
                   setReload={setReload}
                   reload={reload}
                   setEditPost={setEditPost}
-                  isAmdin={isAdmin}
+                  isAdmin={isAdmin}
                 />
               )
             })
