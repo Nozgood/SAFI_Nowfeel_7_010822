@@ -19,7 +19,7 @@ exports.signup = (req, res, next )=> {
                 profilePhotoUrl:  `${req.protocol}://${req.get('host')}/images/${req.files[1].filename}`,
             })
             user.save()
-                .then(()=> res.status(201).json({ message : `'utilisateur crée, rendez-vous à cette adresse : ${test}`}))
+                .then(()=> res.status(201).json({ message : 'utilisateur crée'}))
                 .catch((err) => res.status(400).json({ err }));
         })
         .catch((err)=> res.status(500).json({ err }));
