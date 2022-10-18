@@ -10,6 +10,9 @@
 - Copier / coller le fichier .env.example (au même endroit) en remplaçant le nom du fichier par '.env' 
 - Pour la propriété `PORT`, insérez votre propre valeur
 - Pour la propriété `MONGO`, ajoutez la valeur qui vous a été communiqué dans le fichier .txt 
+
+## Afin de pouvoir directement intéragir avec l'application : 
+
 - Dans le dossier Server, créez le dossier `images`
 - Transférez les fichiers du dossier appelé `files` du livrable vers le dossier `images` que vous venez de créer 
 
@@ -32,6 +35,9 @@ Amusez-vous bien !
 - Copy/paste the .env.example file (in the same place) replacing the file name with '.env'
 - For the `PORT` property, insert your own value
 - For the `MONGO` property, add the value given to you in the .txt file
+
+## In order to be able to directly interact with the application : 
+
 - In the Server folder, create a folder called `images`
 - Transfer the files from the folder called `files` of the deliverable to the folder `images` you just created
 
