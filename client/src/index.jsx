@@ -8,7 +8,6 @@ import Error from './pages/Error'
 import Profile from './pages/profile/Profile'
 import Update from './pages/profile/Update'
 import Search from './pages/Search'
-import Test from './pages/Test'
 import EditPost from './components/Posts/editPost'
 import './style.css'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
@@ -37,7 +36,6 @@ if (!token || token === 'undefined') {
         <Route path="/profile/:userId" element={<Profile />} />
         <Route path="/profile/update/:userId" element={<Update />} />
         <Route path="/*" element={<Error />} />
-        <Route path="/test" element={<Test />} />
       </Routes>
     </BrowserRouter>
   )

@@ -12,7 +12,7 @@ const deleteUser = (userInfos) => {
     .then((res) => {
       if (res.status === 200) {
         localStorage.clear()
-        window.location.reload()
+        window.location.href = 'http://localhost:3000'
       } else {
         alert('Email / mot de passe incorrect')
       }

@@ -32,6 +32,8 @@ const Signup = () => {
   const [loadCover, setLoadCover] = useState(false)
   const [loadProfile, setLoadProfile] = useState(false)
 
+  const credentialsValues = Object.values(userInfos)
+
   const handleRegex = (regexName, value, name) => {
     const testReg = regexName.test(value)
 
@@ -63,14 +65,16 @@ const Signup = () => {
   const handleSubmit = (event) => {
     event.preventDefault()
 
+    console.log(credentialsValues.indexOf(''))
     if (
       regex.userSurname === false ||
       regex.userName === false ||
       regex.email === false ||
       regex.password === false ||
-      regex.passwordConfirm === false
+      regex.passwordConfirm === false ||
+      credentialsValues.indexOf('') !== -1
     ) {
-      alert('Veuillez remplir tous les champs correctement')
+      alert('Veuillez remplir tous les champs en suivant les indications')
     } else {
       formData.append('userSurname', userInfos.userSurname)
       formData.append('userName', userInfos.userName)
@@ -117,15 +121,15 @@ const Signup = () => {
     })
 
     if (profileChange.length > 0) {
-      const test = new FileReader()
+      const img = new FileReader()
 
-      test.onload = function (event) {
+      img.onload = function (event) {
         document
           .getElementById('profileImg')
           .setAttribute('src', event.target.result)
         setLoadProfile(true)
       }
-      test.readAsDataURL(profileChange[0])
+      img.readAsDataURL(profileChange[0])
     }
   }
 

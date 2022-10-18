@@ -105,15 +105,15 @@ const Update = () => {
     })
 
     if (profileChange.length > 0) {
-      const test = new FileReader()
+      const img = new FileReader()
 
-      test.onload = function (event) {
+      img.onload = function (event) {
         document
           .getElementById('profileImg')
           .setAttribute('src', event.target.result)
         setLoadProfile(true)
       }
-      test.readAsDataURL(profileChange[0])
+      img.readAsDataURL(profileChange[0])
     }
   }
 
