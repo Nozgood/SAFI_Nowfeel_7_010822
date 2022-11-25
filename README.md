@@ -9,7 +9,7 @@
 - Rendez-vous dans le dossier server, puis lancer la commande `npm install`
 - Copier / coller le fichier .env.example (au même endroit) en remplaçant le nom du fichier par '.env' 
 - Pour la propriété `PORT`, insérez votre propre valeur
-- Pour la propriété `MONGO`, ajoutez la valeur qui vous a été communiqué dans le fichier .txt 
+- Pour la propriété `MONGO`, ajoutez la valeur qui vous a été communiqué dans le fichier .txt ou votre propre lien à votre DB personnel
 
 ## Afin de pouvoir directement intéragir avec l'application : 
 
@@ -34,7 +34,7 @@ Amusez-vous bien !
 - Go to the server folder, then run the command `npm install`
 - Copy/paste the .env.example file (in the same place) replacing the file name with '.env'
 - For the `PORT` property, insert your own value
-- For the `MONGO` property, add the value given to you in the .txt file
+- For the `MONGO` property, add the value given to you in the .txt file or add your own DB link 
 
 ## In order to be able to directly interact with the application : 
 
